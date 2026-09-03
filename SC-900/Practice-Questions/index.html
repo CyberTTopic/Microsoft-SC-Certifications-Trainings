@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SC-900 Part 1 — Interactive Quiz &amp; Labs | Security, Compliance and Identity Concepts</title>
+<meta name="description" content="Interactive practice for SC-900 Domain 1: 12 multiple-choice questions where every option is explained, plus two hands-on lab exercises on the shared responsibility model and Zero Trust pillars.">
+<meta property="og:title" content="SC-900 Part 1 — Interactive Quiz &amp; Labs">
+<meta property="og:description" content="12 questions with every option explained, plus two interactive lab exercises. Free companion to the SC-900 Study Series.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --ink:#0f172a; --navy:#1e3a8a; --blue:#2563eb; --cyan:#0891b2;
+  --green:#15803d; --red:#b91c1c; --amber:#b45309; --violet:#6d28d9;
+  --mut:#64748b; --line:#d8dfea; --card:#f4f7fc; --w:#fff;
+  --okbg:#eaf6ee; --nobg:#fdeeee; --sel:#eef3fd;
+  --shadow:0 2px 10px rgba(15,23,42,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:#eef2f8; color:var(--ink);
+  font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+/* ---------- header ---------- */
+header{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);color:#fff;padding:44px 0 38px}
+header .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7dd3fc;font-weight:700;margin:0 0 10px}
+header h1{margin:0 0 12px;font-size:34px;line-height:1.2}
+header p{margin:0;color:#bfdbfe;font-size:17px;max-width:640px}
+.badges{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.badge{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:13px;color:#e2e8f0}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:14px;font-weight:600;padding:7px 13px;border-radius:8px}
+nav a:hover{background:var(--card);color:var(--navy)}
+
+/* ---------- sections ---------- */
+section{padding:38px 0 10px}
+h2{font-size:26px;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 22px;font-size:15px}
+.note{background:#fff8ec;border:1px solid #f0d5a8;border-left:4px solid var(--amber);border-radius:10px;padding:14px 16px;font-size:14.5px;margin:0 0 24px}
+.note strong{color:#7c4a03}
+
+/* ---------- scorebar ---------- */
+.scorebar{position:sticky;top:47px;z-index:15;background:var(--w);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.scorebar .lbl{font-size:13px;color:var(--mut);font-weight:600}
+.scorebar .val{font-size:20px;font-weight:700;color:var(--navy)}
+.track{flex:1;min-width:120px;height:9px;background:#e6ecf6;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:width .35s ease}
+
+/* ---------- question ---------- */
+.q{background:var(--w);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+.qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
+.qnum{flex:none;width:32px;height:32px;border-radius:9px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;
+  display:flex;align-items:center;justify-content:center}
+.qtext{font-weight:600;font-size:17.5px;line-height:1.45;margin:3px 0 0}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
+  background:var(--w);border:1.5px solid var(--line);border-radius:11px;padding:13px 15px;font:inherit;color:inherit;
+  transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--blue);background:var(--sel)}
+.opt:disabled{cursor:default}
+.opt .k{flex:none;width:26px;height:26px;border-radius:7px;background:var(--card);border:1px solid var(--line);
+  font-size:13px;font-weight:700;color:var(--mut);display:flex;align-items:center;justify-content:center}
+.opt .t{flex:1}
+.opt.ok{border-color:var(--green);background:var(--okbg)}
+.opt.ok .k{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.no{border-color:var(--red);background:var(--nobg)}
+.opt.no .k{background:var(--red);color:#fff;border-color:var(--red)}
+.opt.dim{opacity:.62}
+.why{display:none;margin:9px 0 4px 38px;padding:11px 14px;border-radius:9px;font-size:14.5px;line-height:1.55;border-left:3px solid}
+.why.show{display:block}
+.why.y{background:var(--okbg);border-color:var(--green)}
+.why.n{background:var(--nobg);border-color:var(--red)}
+.why .tag{font-weight:700;margin-right:5px}
+.why.y .tag{color:var(--green)}
+.why.n .tag{color:var(--red)}
+.verdict{display:none;margin-top:16px;padding:12px 15px;border-radius:10px;font-weight:600;font-size:15px}
+.verdict.show{display:block}
+.verdict.y{background:var(--okbg);color:#14532d}
+.verdict.n{background:var(--nobg);color:#7f1d1d}
+
+/* ---------- result ---------- */
+#result{display:none;background:var(--w);border:2px solid var(--navy);border-radius:14px;padding:26px;margin:8px 0 10px;text-align:center}
+#result.show{display:block}
+#result .big{font-size:52px;font-weight:800;color:var(--navy);line-height:1}
+#result .msg{margin:12px auto 0;max-width:520px;color:var(--mut);font-size:15.5px}
+.btn{display:inline-block;margin-top:18px;background:var(--blue);color:#fff;border:0;border-radius:10px;
+  padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:hover{background:#1d4ed8}
+.btn.ghost{background:var(--w);color:var(--navy);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--card)}
+
+/* ---------- lab ---------- */
+.lab{background:var(--w);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:24px;margin-bottom:22px}
+.lab h3{margin:0 0 4px;font-size:20px}
+.lab .meta{color:var(--mut);font-size:14px;margin:0 0 18px}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left}
+th{background:#e7edf7;color:var(--navy);font-size:13.5px}
+td:first-child{font-weight:600;background:var(--card)}
+select{width:100%;padding:7px 8px;border:1.5px solid var(--line);border-radius:7px;background:var(--w);font:inherit;font-size:14px;color:inherit}
+select.ok{border-color:var(--green);background:var(--okbg)}
+select.no{border-color:var(--red);background:var(--nobg)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.pill{border:1.5px solid var(--line);border-radius:11px;padding:14px;background:var(--card)}
+.pill.empty{border-color:var(--red);background:var(--nobg)}
+.pill h4{margin:0 0 3px;font-size:15.5px}
+.pill .hint{font-size:12.5px;color:var(--mut);margin:0 0 9px}
+textarea{width:100%;min-height:64px;resize:vertical;padding:9px;border:1.5px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:var(--w);color:inherit}
+.feedback{display:none;margin-top:16px;padding:13px 16px;border-radius:10px;font-size:14.5px;line-height:1.55}
+.feedback.show{display:block}
+.feedback.y{background:var(--okbg);border-left:4px solid var(--green)}
+.feedback.n{background:#fff8ec;border-left:4px solid var(--amber)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+/* ---------- cta / footer ---------- */
+.cta{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-radius:14px;padding:28px;margin:30px 0}
+.cta h3{margin:0 0 8px;font-size:21px}
+.cta p{margin:0 0 4px;color:#bfdbfe;font-size:15.5px}
+.cta a.btn{background:#0ea5e9}
+.cta a.btn:hover{background:#0284c7}
+footer{padding:34px 0 46px;color:var(--mut);font-size:13.5px;text-align:center}
+footer a{color:var(--blue)}
+
+@media(max-width:640px){
+  header h1{font-size:26px}
+  header{padding:32px 0 28px}
+  .q,.lab{padding:17px}
+  .qtext{font-size:16.5px}
+  .why{margin-left:0}
+  .scorebar{top:45px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">SC-900 Study Series · Part 1</p>
+    <h1>Security, Compliance and Identity Concepts</h1>
+    <p>Interactive practice for Domain 1. Twelve exam-style questions where <strong>every option is explained</strong> — why the right one is right, and why each wrong one is wrong — plus two hands-on lab exercises.</p>
+    <div class="badges">
+      <span class="badge">12 questions</span>
+      <span class="badge">2 lab exercises</span>
+      <span class="badge">Domain 1 · 10–15% of the exam</span>
+      <span class="badge">Objectives updated 28 July 2026</span>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#quiz">Quiz (12 questions)</a>
+  <a href="#lab1">Lab 1 · Shared responsibility</a>
+  <a href="#lab2">Lab 2 · Zero Trust pillars</a>
+  <a href="#next">Next steps</a>
+</div></nav>
+
+<div class="wrap">
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <h2>📝 Practice quiz — 12 questions</h2>
+  <p class="sub">Pick an answer and you'll immediately see why it's right or wrong, along with the reasoning for the other three options.</p>
+
+  <div class="note">
+    <strong>How to get the most out of this:</strong> before clicking, say out loud why you are rejecting each of the other three options. The real exam is won by elimination, not by recognition. The options are shuffled on every attempt, so retaking it tests the concept and not the position you memorized.
+  </div>
+
+  <div class="scorebar">
+    <span class="lbl">Answered</span><span class="val" id="answered">0 / 12</span>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span class="lbl">Correct</span><span class="val" id="score">0</span>
+  </div>
+
+  <div id="questions"></div>
+
+  <div id="result">
+    <div class="big" id="finalScore">0 / 12</div>
+    <p class="msg" id="finalMsg"></p>
+    <button class="btn ghost" onclick="resetQuiz()">Try again</button>
+  </div>
+</section>
+
+<!-- ============ LAB 1 ============ -->
+<section id="lab1">
+  <h2>🧪 Lab 1 — The shared responsibility model</h2>
+  <p class="sub">Fill the table from memory. For each resource, decide who is responsible in each service model.</p>
+
+  <div class="lab">
+    <h3>Who owns what?</h3>
+    <p class="meta">Time: 5 minutes · No lookups. The point is to find out what you actually remember.</p>
+    <div class="tblwrap">
+      <table id="srTable">
+        <thead><tr><th>Resource</th><th>On-premises</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkSR()">Check my answers</button>
+      <button class="btn ghost" onclick="resetSR()">Clear</button>
+    </div>
+    <div class="feedback" id="srFeedback"></div>
+  </div>
+</section>
+
+<!-- ============ LAB 2 ============ -->
+<section id="lab2">
+  <h2>🧪 Lab 2 — Map your own laptop to Zero Trust</h2>
+  <p class="sub">No tenant, no trial, no cost. Just the device you're reading this on.</p>
+
+  <div class="lab">
+    <h3>What is protecting you right now?</h3>
+    <p class="meta">Time: 15 minutes · Under each of the six Zero Trust pillars, write what protects <em>you</em> today. Leave it blank if the honest answer is "nothing" — the blanks are the point of the exercise.</p>
+    <div class="pillars" id="pillars"></div>
+    <div class="row">
+      <button class="btn" onclick="checkPillars()">Find my gaps</button>
+      <button class="btn ghost" onclick="copyNotes()">Copy my notes</button>
+      <button class="btn ghost" onclick="resetPillars()">Clear</button>
+    </div>
+    <div class="feedback" id="pillarFeedback"></div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section id="next">
+  <div class="cta">
+    <h3>This is the companion to the SC-900 Study Series</h3>
+    <p>The full write-up has the diagrams, the exam traps and the explanations behind every one of these questions — four domains, free labs and a mock exam.</p>
+    <a class="btn" href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener">Read the series on DEV →</a>
+  </div>
+</section>
+
+<footer>
+  <p>Built as a free study companion for Microsoft SC-900 · Domain 1.<br>
+  Always confirm the current objectives on the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-900" target="_blank" rel="noopener">official study guide</a> before your exam.</p>
+</footer>
+
+</div>
+
+<script>
+/* ================= QUIZ DATA ================= */
+const QUESTIONS = [
+{
+  q: "A company moves its email to Microsoft 365 (SaaS). Who is responsible for managing user identities?",
+  correct: 1,
+  options: [
+    {t:"Microsoft, because it manages the whole SaaS platform",
+     why:"Microsoft runs the service, but it never takes over your accounts. It does not decide who works at your company or which of them should be an administrator."},
+    {t:"The customer",
+     why:"Data, devices, and accounts &amp; identities are the three rows that stay with you in every model — on-premises, IaaS, PaaS and SaaS. Moving to SaaS shifts infrastructure work, not identity ownership."},
+    {t:"It is split 50/50 between Microsoft and the customer",
+     why:"The model does have shared rows, but identities is not one of them. Percentages never appear in the real diagram."},
+    {t:"The internet service provider",
+     why:"The ISP provides connectivity. It has no role in the shared responsibility model."}
+  ]
+},
+{
+  q: "Which Zero Trust principle tells you to grant just-in-time and just-enough access?",
+  correct: 2,
+  options: [
+    {t:"Verify explicitly",
+     why:"Right family, wrong principle. This one is about authenticating and authorizing on all available signals — identity, location, device health, anomalies. It says nothing about how much access to grant."},
+    {t:"Assume breach",
+     why:"This is about containing an attacker who is already inside: segmentation, end-to-end encryption, analytics."},
+    {t:"Use least privilege access",
+     why:"The exact wording of this principle is \"just-in-time and just-enough-access (JIT/JEA), with risk-based adaptive policies\". If a question contains JIT or JEA, it is this one."},
+    {t:"Defense in depth",
+     why:"A real and important concept, but <strong>not</strong> one of the three Zero Trust principles — it's the layered-controls model. Classic distractor."}
+  ]
+},
+{
+  q: "Which property of the CIA triad does hashing primarily support?",
+  correct: 1,
+  options: [
+    {t:"Confidentiality",
+     why:"Hashing does not keep anything secret; a hash is usually public. Confidentiality is what encryption gives you."},
+    {t:"Integrity",
+     why:"Change one byte and the hash changes completely, so comparing hashes tells you whether the data was altered. That is the definition of integrity."},
+    {t:"Availability",
+     why:"Availability is about the data being reachable — redundancy, backups, DDoS protection. Hashing does nothing for it."},
+    {t:"Non-repudiation",
+     why:"A genuine security property, but it is <strong>not part of the CIA triad</strong>, and it comes from digital signatures, not from a bare hash. Read the question: it says \"of the CIA triad\"."}
+  ]
+},
+{
+  q: "You need to store user passwords so they can be verified but never recovered. What do you use?",
+  correct: 2,
+  options: [
+    {t:"Symmetric encryption",
+     why:"Reversible by design. Anyone who obtains the key recovers every password in plaintext — the requirement explicitly says \"never recovered\"."},
+    {t:"Asymmetric encryption",
+     why:"Also reversible, with the private key. Same problem, plus it is slow for this purpose."},
+    {t:"Hashing with a salt",
+     why:"One-way: the same password always produces the same hash, so you can verify a login, but there is no \"unhash\". The salt makes each hash unique so identical passwords don't look identical, and it breaks precomputed rainbow tables."},
+    {t:"A digital certificate",
+     why:"A certificate binds a public key to an identity. It is not a password storage mechanism."}
+  ]
+},
+{
+  q: "Which cryptographic operation provides non-repudiation?",
+  correct: 2,
+  options: [
+    {t:"Symmetric encryption with a shared key",
+     why:"The key is shared, so either party could have produced the message. Anyone can plausibly deny it — the exact opposite of non-repudiation."},
+    {t:"Hashing",
+     why:"Proves the content wasn't altered, but proves nothing about who produced it. Anyone can hash anything."},
+    {t:"A digital signature",
+     why:"You sign with your own private key, which only you hold; anyone verifies with your public key. Since no one else could have produced that signature, you cannot credibly deny having signed it. That is non-repudiation — and it delivers integrity and authenticity too."},
+    {t:"TLS",
+     why:"Protects data in transit (confidentiality and integrity on the wire). It uses signatures internally, but TLS itself is not the operation the question is asking about."}
+  ]
+},
+{
+  q: "In IaaS, who is responsible for patching the guest operating system?",
+  correct: 1,
+  options: [
+    {t:"Microsoft",
+     why:"In IaaS, Microsoft's responsibility stops at the physical host, the network hardware and the hypervisor. Everything from the guest OS upward is yours."},
+    {t:"The customer",
+     why:"In IaaS you rent the machine, not its administration. OS patching, hardening, antivirus and the apps on top are all yours. In <strong>PaaS</strong> the answer would flip to Microsoft — that is the pair the exam likes to test."},
+    {t:"Nobody — Azure virtual machines patch themselves automatically",
+     why:"Azure offers Update Manager and automatic guest patching, but you have to enable and configure them. The responsibility is still yours; the tooling doesn't transfer it."},
+    {t:"Shared: Microsoft applies security patches, the customer applies the rest",
+     why:"The model has no such split. Invented distractor — but a tempting one, so read carefully."}
+  ]
+},
+{
+  q: "A user signs in once and reaches six SaaS apps without typing the password again. What is this?",
+  correct: 2,
+  options: [
+    {t:"Federation",
+     why:"Federation is the trust relationship between organizations or identity providers that can make SSO possible across company boundaries. The question describes the user experience, not the trust — and it never mentions a second organization."},
+    {t:"Multifactor authentication",
+     why:"MFA is about how many factors you present at sign-in, not about how many apps you reach afterwards."},
+    {t:"Single sign-on",
+     why:"Authenticate once, get a token, use it across multiple applications. Remember: SSO is an <strong>authentication</strong> feature. It says nothing about what the user is allowed to do inside those apps."},
+    {t:"Authorization",
+     why:"Authorization decides permissions. The user in the question isn't gaining permissions, just avoiding repeated sign-ins."}
+  ]
+},
+{
+  q: "Which term describes an attack that tries one common password against thousands of accounts?",
+  correct: 2,
+  options: [
+    {t:"Brute force",
+     why:"Many passwords against <strong>one</strong> account. It triggers lockout policies quickly, which is precisely what the attacker in this question is avoiding."},
+    {t:"Dictionary attack",
+     why:"Also aimed at one account, using a wordlist of likely passwords. Same lockout problem."},
+    {t:"Password spray",
+     why:"The relationship is inverted: <strong>one</strong> password (Summer2026!, Welcome1) against <strong>thousands</strong> of accounts. Each account only sees one failed attempt, so lockout thresholds never fire — which is why lockout alone doesn't detect it, and why you need MFA and sign-in risk detection."},
+    {t:"Phishing",
+     why:"Tricks the user into handing over the credential. No password guessing involved."}
+  ]
+},
+{
+  q: "Which data state describes information being sent between a browser and a web server?",
+  correct: 2,
+  options: [
+    {t:"Data at rest",
+     why:"Stored data: disks, databases, blob storage, backups. Protected with encryption at rest."},
+    {t:"Data in use",
+     why:"Data loaded in memory and actively being processed. Protected with things like confidential computing."},
+    {t:"Data in transit",
+     why:"Data moving across a network — browser to server, service to service, on-prem to cloud. Protected with TLS/HTTPS and VPNs."},
+    {t:"Data in memory",
+     why:"Not one of the three official states. It is a rewording of \"in use\", put there to make you hesitate. The exam recognizes exactly three: at rest, in transit, in use."}
+  ]
+},
+{
+  q: "What does \"assume breach\" imply in practice?",
+  correct: 1,
+  options: [
+    {t:"Treat every user as malicious and block access by default",
+     why:"Overstates it, and Microsoft explicitly rejects this reading. Zero Trust means never trusting implicitly — it still grants access, just after verification. If it blocked everyone, nobody could work."},
+    {t:"Segment access, encrypt end to end, and use analytics to detect lateral movement",
+     why:"These are the literal actions Microsoft attaches to \"assume breach\": minimize the blast radius, segment access, verify end-to-end encryption, and use analytics to gain visibility, drive threat detection and improve defenses."},
+    {t:"Accept that a breach is inevitable and shift the budget from prevention to insurance",
+     why:"A business decision, not a security principle. Assume breach adds controls; it never means giving up on prevention."},
+    {t:"Notify the regulator every time an alert fires",
+     why:"That is breach notification, a compliance obligation, and it applies to confirmed incidents — not to every alert, and not as an architecture principle."}
+  ]
+},
+{
+  q: "Which is the correct order of operations?",
+  correct: 1,
+  options: [
+    {t:"Authorization, then authentication",
+     why:"Impossible: you can't decide what someone is permitted to do before you know who they are. There would be no identity to check permissions against."},
+    {t:"Authentication, then authorization",
+     why:"AuthN answers \"who are you?\", AuthZ answers \"what are you allowed to do?\" Always in that order — the airport analogy: passport control (AuthN) before the boarding pass check that decides which seat you get (AuthZ)."},
+    {t:"They happen simultaneously",
+     why:"They may look instantaneous to the user, but they are two distinct, sequential steps. A token is issued first, then evaluated against permissions."},
+    {t:"It depends on the application",
+     why:"The order never changes. Applications differ in how they implement each step, not in their sequence."}
+  ]
+},
+{
+  q: "Your organization trusts identities issued by a partner company so their users can reach your app. What is this called?",
+  correct: 1,
+  options: [
+    {t:"Single sign-on",
+     why:"SSO is the experience the user gets. Federation is the trust that makes it work across organizational boundaries. The question describes trusting another company's issued identities — that is the trust, not the experience."},
+    {t:"Federation",
+     why:"A trust relationship between two identity providers: the partner's IdP authenticates its own users, and your system accepts that assertion. Neither organization has to manage the other's passwords. This is the mechanism behind B2B collaboration and AD FS."},
+    {t:"Delegation",
+     why:"Generally means acting on another user's behalf (delegated permissions, mailbox delegation). Not a trust between organizations."},
+    {t:"Conditional Access",
+     why:"A policy engine that decides whether to grant access based on signals. It enforces conditions, but it doesn't establish trust with a partner directory — and it is domain 2 material."}
+  ]
+}
+];
+
+const KEYS = ["A","B","C","D"];
+let answered = 0, score = 0;
+let VIEW = [];
+
+/* Options are shuffled on every run, so retaking the quiz tests the concept
+   and not the position of the answer you remember. */
+function shuffleQuestions(){
+  VIEW = QUESTIONS.map(item => {
+    const idx = item.options.map((_, i) => i);
+    for (let i = idx.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    return {
+      q: item.q,
+      options: idx.map(i => item.options[i]),
+      correct: idx.indexOf(item.correct)
+    };
+  });
+}
+
+function buildQuiz(){
+  shuffleQuestions();
+  const host = document.getElementById("questions");
+  host.innerHTML = "";
+  VIEW.forEach((item, qi) => {
+    const card = document.createElement("div");
+    card.className = "q";
+    card.id = "q" + qi;
+
+    let html = '<div class="qhead"><div class="qnum">' + (qi+1) + '</div>'
+             + '<p class="qtext">' + item.q + '</p></div><div class="opts">';
+
+    item.options.forEach((o, oi) => {
+      html += '<button class="opt" id="o' + qi + '-' + oi + '" onclick="answer(' + qi + ',' + oi + ')">'
+            + '<span class="k">' + KEYS[oi] + '</span><span class="t">' + o.t + '</span></button>'
+            + '<div class="why" id="w' + qi + '-' + oi + '"><span class="tag"></span>'
+            + '<span class="wt">' + o.why + '</span></div>';
+    });
+
+    html += '</div><div class="verdict" id="v' + qi + '"></div>';
+    card.innerHTML = html;
+    host.appendChild(card);
+  });
+}
+
+function answer(qi, oi){
+  const item = VIEW[qi];
+  const card = document.getElementById("q" + qi);
+  if (card.dataset.done) return;
+  card.dataset.done = "1";
+
+  const right = (oi === item.correct);
+  answered++;
+  if (right) score++;
+
+  item.options.forEach((o, i) => {
+    const btn = document.getElementById("o" + qi + "-" + i);
+    const why = document.getElementById("w" + qi + "-" + i);
+    btn.disabled = true;
+    const isCorrect = (i === item.correct);
+
+    if (isCorrect)      btn.classList.add("ok");
+    else if (i === oi)  btn.classList.add("no");
+    else                btn.classList.add("dim");
+
+    why.classList.add("show", isCorrect ? "y" : "n");
+    why.querySelector(".tag").textContent = isCorrect ? "✅ Correct —" : "❌ Incorrect —";
+  });
+
+  const v = document.getElementById("v" + qi);
+  v.classList.add("show", right ? "y" : "n");
+  v.textContent = right
+    ? "✅ Correct. Answer " + KEYS[item.correct] + "."
+    : "❌ Not quite. The correct answer is " + KEYS[item.correct] + " — " + item.options[item.correct].t + ".";
+
+  updateBar();
+  if (answered === QUESTIONS.length) showResult();
+}
+
+function updateBar(){
+  document.getElementById("answered").textContent = answered + " / " + QUESTIONS.length;
+  document.getElementById("score").textContent = score;
+  document.getElementById("fill").style.width = (answered / QUESTIONS.length * 100) + "%";
+}
+
+function showResult(){
+  const box = document.getElementById("result");
+  document.getElementById("finalScore").textContent = score + " / " + QUESTIONS.length;
+  let msg;
+  if (score >= 11)     msg = "Excellent. Domain 1 is done — move on to Part 2 (Microsoft Entra), which is worth 25–30% of the exam.";
+  else if (score >= 9) msg = "Solid. Reread the section behind each question you missed, then come back and retake this in a couple of days.";
+  else                 msg = "Worth another pass. The gap is almost always one of two things: the shared responsibility model, or hashing vs encryption. Those two produce most of the errors in this domain.";
+  document.getElementById("finalMsg").textContent = msg;
+  box.classList.add("show");
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+function resetQuiz(){
+  answered = 0; score = 0;
+  document.getElementById("result").classList.remove("show");
+  buildQuiz();
+  updateBar();
+  document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+}
+
+/* ================= LAB 1: shared responsibility ================= */
+const SR_ROWS = [
+  {r:"Data",                a:["C","C","C","C"], note:"Your data is yours in every model. This row never changes."},
+  {r:"Accounts and identities", a:["C","C","C","C"], note:"Same rule: identities are always the customer's, even in SaaS."},
+  {r:"Operating system",    a:["C","C","M","M"], note:"Yours through IaaS; Microsoft's from PaaS upward. This is the row the exam tests most."},
+  {r:"Physical datacenter", a:["C","M","M","M"], note:"The moment you go to the cloud, the building stops being your problem."}
+];
+const SR_COLS = ["On-premises","IaaS","PaaS","SaaS"];
+const SR_OPTS = {C:"Customer", S:"Shared", M:"Microsoft"};
+
+function buildSR(){
+  const tb = document.querySelector("#srTable tbody");
+  tb.innerHTML = "";
+  SR_ROWS.forEach((row, ri) => {
+    const tr = document.createElement("tr");
+    let html = "<td>" + row.r + "</td>";
+    SR_COLS.forEach((c, ci) => {
+      html += '<td><select id="sr' + ri + '-' + ci + '" aria-label="' + row.r + ' in ' + c + '">'
+            + '<option value="">— choose —</option>'
+            + '<option value="C">Customer</option>'
+            + '<option value="S">Shared</option>'
+            + '<option value="M">Microsoft</option></select></td>';
+    });
+    tr.innerHTML = html;
+    tb.appendChild(tr);
+  });
+}
+
+function checkSR(){
+  let ok = 0, total = 0, blank = 0;
+  const missed = [];
+  SR_ROWS.forEach((row, ri) => {
+    SR_COLS.forEach((c, ci) => {
+      total++;
+      const sel = document.getElementById("sr" + ri + "-" + ci);
+      sel.classList.remove("ok","no");
+      if (!sel.value) { blank++; return; }
+      if (sel.value === row.a[ci]) { sel.classList.add("ok"); ok++; }
+      else {
+        sel.classList.add("no");
+        missed.push(row.r + " / " + c + " → <strong>" + SR_OPTS[row.a[ci]] + "</strong>");
+      }
+    });
+  });
+
+  const fb = document.getElementById("srFeedback");
+  fb.className = "feedback show " + (ok === total ? "y" : "n");
+
+  if (blank === total) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Fill in the table first — even if you're guessing. Guessing and then seeing the correction is what makes it stick.";
+    return;
+  }
+
+  let html = "<strong>" + ok + " / " + total + " correct.</strong>";
+  if (missed.length) {
+    html += "<br>Corrections:<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " cell(s) left blank.</em>";
+
+  if (ok === total) {
+    html += "<br><br>That's the whole model. Notice the pattern: the top two rows are all Customer, and each column below moves one step toward Microsoft. If you can redraw this table from memory, you've secured a family of exam questions.";
+  } else {
+    html += "<br><br>The rule that fixes most mistakes: <strong>data, devices and identities are always the customer's</strong>, in every model. Everything else shifts to Microsoft as you move right.";
+  }
+  fb.innerHTML = html;
+}
+
+function resetSR(){
+  buildSR();
+  document.getElementById("srFeedback").className = "feedback";
+}
+
+/* ================= LAB 2: Zero Trust pillars ================= */
+const PILLARS = [
+  {n:"Identities",    h:"e.g. password + MFA on my Microsoft account"},
+  {n:"Endpoints",     h:"e.g. BitLocker + Defender antivirus, automatic updates"},
+  {n:"Applications",  h:"e.g. apps only from official stores, browser kept updated"},
+  {n:"Data",          h:"e.g. OneDrive with versioning, an encrypted backup"},
+  {n:"Infrastructure",h:"e.g. the cloud services I depend on, my router firmware"},
+  {n:"Network",       h:"e.g. WPA3 Wi-Fi, VPN on public networks, changed router password"}
+];
+const STORE = "sc900_zt_pillars";
+
+function buildPillars(){
+  const host = document.getElementById("pillars");
+  host.innerHTML = "";
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e) { saved = {}; }
+
+  PILLARS.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "pill";
+    div.id = "p" + i;
+    div.innerHTML = '<h4>' + (i+1) + '. ' + p.n + '</h4>'
+                  + '<p class="hint">' + p.h + '</p>'
+                  + '<textarea id="pt' + i + '" placeholder="What protects me here today?"></textarea>';
+    host.appendChild(div);
+    const ta = div.querySelector("textarea");
+    if (saved[p.n]) ta.value = saved[p.n];
+    ta.addEventListener("input", savePillars);
+  });
+}
+
+function savePillars(){
+  const data = {};
+  PILLARS.forEach((p, i) => { data[p.n] = document.getElementById("pt" + i).value; });
+  try { localStorage.setItem(STORE, JSON.stringify(data)); } catch(e) {}
+}
+
+function checkPillars(){
+  const gaps = [];
+  PILLARS.forEach((p, i) => {
+    const box = document.getElementById("p" + i);
+    const val = document.getElementById("pt" + i).value.trim();
+    box.classList.toggle("empty", val === "");
+    if (val === "") gaps.push(p.n);
+  });
+
+  const fb = document.getElementById("pillarFeedback");
+  fb.className = "feedback show " + (gaps.length ? "n" : "y");
+
+  if (!gaps.length) {
+    fb.innerHTML = "<strong>All six pillars covered.</strong> Now go one level deeper: for each pillar, ask what would happen if that single control failed. If the answer is \"the attacker reaches my data\", that pillar needs a second layer — which is exactly what defense in depth means.";
+  } else {
+    fb.innerHTML = "<strong>" + gaps.length + " gap(s) found: " + gaps.join(", ") + ".</strong>"
+      + "<br>That is the normal result, and it is the point of the exercise — most people come up empty on <em>data</em> and <em>network</em>."
+      + "<br><br>For each gap, write down the one control you would add first, and why. Two that cost nothing: turn on encrypted backup for the folders you'd hate to lose (data), and change your router's default admin password (network).";
+  }
+}
+
+function copyNotes(){
+  let txt = "SC-900 — My Zero Trust pillar map\n\n";
+  PILLARS.forEach((p, i) => {
+    const v = document.getElementById("pt" + i).value.trim();
+    txt += p.n + ": " + (v || "(GAP — nothing yet)") + "\n";
+  });
+  const done = () => {
+    const fb = document.getElementById("pillarFeedback");
+    fb.className = "feedback show y";
+    fb.innerHTML = "Notes copied to your clipboard. Paste them into your study document — this makes a good \"before and after\" to revisit once you finish the series.";
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(done).catch(() => fallbackCopy(txt, done));
+  } else {
+    fallbackCopy(txt, done);
+  }
+}
+
+function fallbackCopy(txt, done){
+  const ta = document.createElement("textarea");
+  ta.value = txt;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+function resetPillars(){
+  try { localStorage.removeItem(STORE); } catch(e) {}
+  buildPillars();
+  document.getElementById("pillarFeedback").className = "feedback";
+}
+
+/* ================= INIT ================= */
+buildQuiz();
+buildSR();
+buildPillars();
+updateBar();
+</script>
+</body>
+</html>
