@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SC-900 Part 1 — Interactive Quiz &amp; Labs | Security, Compliance and Identity Concepts</title>
-<meta name="description" content="Interactive practice for SC-900 Domain 1: 12 multiple-choice questions where every option is explained, plus two hands-on lab exercises on the shared responsibility model and Zero Trust pillars.">
-<meta property="og:title" content="SC-900 Part 1 — Interactive Quiz &amp; Labs">
-<meta property="og:description" content="12 questions with every option explained, plus two interactive lab exercises. Free companion to the SC-900 Study Series.">
+<title>SC-900 Interactive Quiz &amp; Labs — Domains 1 and 2</title>
+<meta name="description" content="Free interactive practice for Microsoft SC-900: 24 multiple-choice questions where every option is explained, plus four self-grading lab exercises covering the shared responsibility model, Zero Trust, Entra ID licensing and Conditional Access.">
+<meta property="og:title" content="SC-900 Interactive Quiz &amp; Labs">
+<meta property="og:description" content="24 questions with every option explained, plus four self-grading lab exercises. Free companion to the SC-900 Study Series.">
 <meta property="og:type" content="website">
 <style>
 :root{
+  color-scheme: light;
   --ink:#0f172a; --navy:#1e3a8a; --blue:#2563eb; --cyan:#0891b2;
   --green:#15803d; --red:#b91c1c; --amber:#b45309; --violet:#6d28d9;
   --mut:#64748b; --line:#d8dfea; --card:#f4f7fc; --w:#fff;
@@ -29,25 +30,34 @@ body{
 header{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);color:#fff;padding:44px 0 38px}
 header .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7dd3fc;font-weight:700;margin:0 0 10px}
 header h1{margin:0 0 12px;font-size:34px;line-height:1.2}
-header p{margin:0;color:#bfdbfe;font-size:17px;max-width:640px}
+header p{margin:0;color:#bfdbfe;font-size:17px;max-width:660px}
 .badges{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
 .badge{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:13px;color:#e2e8f0}
 
-/* ---------- nav ---------- */
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
-nav a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:14px;font-weight:600;padding:7px 13px;border-radius:8px}
-nav a:hover{background:var(--card);color:var(--navy)}
+/* ---------- tabs ---------- */
+.tabs{position:sticky;top:0;z-index:25;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:0}
+.tab{white-space:nowrap;background:none;border:0;border-bottom:3px solid transparent;font:inherit;font-weight:600;
+  color:var(--mut);padding:10px 14px 12px;cursor:pointer}
+.tab:hover{color:var(--navy)}
+.tab.on{color:var(--navy);border-bottom-color:var(--blue)}
+.tab .w{display:block;font-size:11.5px;font-weight:600;color:var(--mut);letter-spacing:.5px}
+.panel{display:none}
+.panel.on{display:block}
 
 /* ---------- sections ---------- */
-section{padding:38px 0 10px}
+section{padding:34px 0 10px}
 h2{font-size:26px;margin:0 0 6px}
 .sub{color:var(--mut);margin:0 0 22px;font-size:15px}
 .note{background:#fff8ec;border:1px solid #f0d5a8;border-left:4px solid var(--amber);border-radius:10px;padding:14px 16px;font-size:14.5px;margin:0 0 24px}
 .note strong{color:#7c4a03}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.jump a{text-decoration:none;font-size:13.5px;font-weight:600;color:var(--navy);background:var(--w);
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.jump a:hover{background:var(--sel)}
 
 /* ---------- scorebar ---------- */
-.scorebar{position:sticky;top:47px;z-index:15;background:var(--w);border:1px solid var(--line);border-radius:12px;
+.scorebar{position:sticky;top:56px;z-index:15;background:var(--w);border:1px solid var(--line);border-radius:12px;
   box-shadow:var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
 .scorebar .lbl{font-size:13px;color:var(--mut);font-weight:600}
 .scorebar .val{font-size:20px;font-weight:700;color:var(--navy)}
@@ -87,10 +97,10 @@ h2{font-size:26px;margin:0 0 6px}
 .verdict.n{background:var(--nobg);color:#7f1d1d}
 
 /* ---------- result ---------- */
-#result{display:none;background:var(--w);border:2px solid var(--navy);border-radius:14px;padding:26px;margin:8px 0 10px;text-align:center}
-#result.show{display:block}
-#result .big{font-size:52px;font-weight:800;color:var(--navy);line-height:1}
-#result .msg{margin:12px auto 0;max-width:520px;color:var(--mut);font-size:15.5px}
+.result{display:none;background:var(--w);border:2px solid var(--navy);border-radius:14px;padding:26px;margin:8px 0 10px;text-align:center}
+.result.show{display:block}
+.result .big{font-size:52px;font-weight:800;color:var(--navy);line-height:1}
+.result .msg{margin:12px auto 0;max-width:540px;color:var(--mut);font-size:15.5px}
 .btn{display:inline-block;margin-top:18px;background:var(--blue);color:#fff;border:0;border-radius:10px;
   padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
 .btn:hover{background:#1d4ed8}
@@ -115,6 +125,10 @@ select.no{border-color:var(--red);background:var(--nobg)}
 .pill h4{margin:0 0 3px;font-size:15.5px}
 .pill .hint{font-size:12.5px;color:var(--mut);margin:0 0 9px}
 textarea{width:100%;min-height:64px;resize:vertical;padding:9px;border:1.5px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:var(--w);color:inherit}
+.ca{border:1.5px solid var(--line);border-radius:11px;padding:16px;background:var(--card);margin-bottom:13px}
+.ca h4{margin:0 0 12px;font-size:15.5px}
+.ca .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ca label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);letter-spacing:.5px;margin-bottom:5px}
 .feedback{display:none;margin-top:16px;padding:13px 16px;border-radius:10px;font-size:14.5px;line-height:1.55}
 .feedback.show{display:block}
 .feedback.y{background:var(--okbg);border-left:4px solid var(--green)}
@@ -136,7 +150,8 @@ footer a{color:var(--blue)}
   .q,.lab{padding:17px}
   .qtext{font-size:16.5px}
   .why{margin-left:0}
-  .scorebar{top:45px}
+  .scorebar{top:62px}
+  .ca .pair{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -144,56 +159,60 @@ footer a{color:var(--blue)}
 
 <header>
   <div class="wrap">
-    <p class="kicker">SC-900 Study Series · Part 1</p>
-    <h1>Security, Compliance and Identity Concepts</h1>
-    <p>Interactive practice for Domain 1. Twelve exam-style questions where <strong>every option is explained</strong> — why the right one is right, and why each wrong one is wrong — plus two hands-on lab exercises.</p>
+    <p class="kicker">SC-900 Study Series</p>
+    <h1>Interactive quiz &amp; labs</h1>
+    <p>Exam-style questions where <strong>every option is explained</strong> — why the right one is right, and why each wrong one is wrong — plus self-grading lab exercises. Free companion to the written series.</p>
     <div class="badges">
-      <span class="badge">12 questions</span>
-      <span class="badge">2 lab exercises</span>
-      <span class="badge">Domain 1 · 10–15% of the exam</span>
+      <span class="badge">24 questions</span>
+      <span class="badge">4 interactive labs</span>
+      <span class="badge">Domains 1–2 of 4</span>
       <span class="badge">Objectives updated 28 July 2026</span>
     </div>
   </div>
 </header>
 
-<nav><div class="wrap">
-  <a href="#quiz">Quiz (12 questions)</a>
-  <a href="#lab1">Lab 1 · Shared responsibility</a>
-  <a href="#lab2">Lab 2 · Zero Trust pillars</a>
-  <a href="#next">Next steps</a>
-</div></nav>
+<div class="tabs"><div class="wrap">
+  <button class="tab on" id="tab-d1" onclick="showTab('d1')">Domain 1 · Concepts<span class="w">10–15% of the exam</span></button>
+  <button class="tab" id="tab-d2" onclick="showTab('d2')">Domain 2 · Microsoft Entra<span class="w">25–30% of the exam</span></button>
+</div></div>
 
 <div class="wrap">
 
-<!-- ============ QUIZ ============ -->
-<section id="quiz">
-  <h2>📝 Practice quiz — 12 questions</h2>
-  <p class="sub">Pick an answer and you'll immediately see why it's right or wrong, along with the reasoning for the other three options.</p>
+<!-- ==================== DOMAIN 1 ==================== -->
+<div class="panel on" id="panel-d1">
 
-  <div class="note">
-    <strong>How to get the most out of this:</strong> before clicking, say out loud why you are rejecting each of the other three options. The real exam is won by elimination, not by recognition. The options are shuffled on every attempt, so retaking it tests the concept and not the position you memorized.
-  </div>
-
-  <div class="scorebar">
-    <span class="lbl">Answered</span><span class="val" id="answered">0 / 12</span>
-    <div class="track"><div class="fill" id="fill"></div></div>
-    <span class="lbl">Correct</span><span class="val" id="score">0</span>
-  </div>
-
-  <div id="questions"></div>
-
-  <div id="result">
-    <div class="big" id="finalScore">0 / 12</div>
-    <p class="msg" id="finalMsg"></p>
-    <button class="btn ghost" onclick="resetQuiz()">Try again</button>
+<section>
+  <h2>Domain 1 — Security, compliance and identity concepts</h2>
+  <p class="sub">The vocabulary the other 85% of the exam is written in: shared responsibility, Zero Trust, the CIA triad, cryptography and authN vs authZ.</p>
+  <div class="jump">
+    <a href="#d1-quiz">12 questions</a>
+    <a href="#d1-lab1">Lab · Shared responsibility</a>
+    <a href="#d1-lab2">Lab · Zero Trust pillars</a>
   </div>
 </section>
 
-<!-- ============ LAB 1 ============ -->
-<section id="lab1">
+<section id="d1-quiz">
+  <h2>📝 Practice quiz — 12 questions</h2>
+  <p class="sub">Pick an answer and you immediately see why it's right or wrong, along with the reasoning for the other three options.</p>
+  <div class="note">
+    <strong>How to get the most out of this:</strong> before clicking, say out loud why you are rejecting each of the other three options. The real exam is won by elimination, not by recognition. The options are shuffled on every attempt, so retaking it tests the concept and not the position you memorized.
+  </div>
+  <div class="scorebar">
+    <span class="lbl">Answered</span><span class="val" id="answered-d1">0 / 12</span>
+    <div class="track"><div class="fill" id="fill-d1"></div></div>
+    <span class="lbl">Correct</span><span class="val" id="score-d1">0</span>
+  </div>
+  <div id="questions-d1"></div>
+  <div class="result" id="result-d1">
+    <div class="big" id="finalScore-d1">0 / 12</div>
+    <p class="msg" id="finalMsg-d1"></p>
+    <button class="btn ghost" onclick="resetQuiz('d1')">Try again</button>
+  </div>
+</section>
+
+<section id="d1-lab1">
   <h2>🧪 Lab 1 — The shared responsibility model</h2>
   <p class="sub">Fill the table from memory. For each resource, decide who is responsible in each service model.</p>
-
   <div class="lab">
     <h3>Who owns what?</h3>
     <p class="meta">Time: 5 minutes · No lookups. The point is to find out what you actually remember.</p>
@@ -211,11 +230,9 @@ footer a{color:var(--blue)}
   </div>
 </section>
 
-<!-- ============ LAB 2 ============ -->
-<section id="lab2">
+<section id="d1-lab2">
   <h2>🧪 Lab 2 — Map your own laptop to Zero Trust</h2>
   <p class="sub">No tenant, no trial, no cost. Just the device you're reading this on.</p>
-
   <div class="lab">
     <h3>What is protecting you right now?</h3>
     <p class="meta">Time: 15 minutes · Under each of the six Zero Trust pillars, write what protects <em>you</em> today. Leave it blank if the honest answer is "nothing" — the blanks are the point of the exercise.</p>
@@ -229,25 +246,98 @@ footer a{color:var(--blue)}
   </div>
 </section>
 
-<!-- ============ NEXT ============ -->
+</div>
+
+<!-- ==================== DOMAIN 2 ==================== -->
+<div class="panel" id="panel-d2">
+
+<section>
+  <h2>Domain 2 — Microsoft Entra capabilities</h2>
+  <p class="sub">A quarter of the exam, and the domain that pays off most in a real job: tenant objects, authentication methods, Conditional Access and the licence tiers that decide several questions.</p>
+  <div class="jump">
+    <a href="#d2-quiz">12 questions</a>
+    <a href="#d2-lab1">Lab · Licensing tiers</a>
+    <a href="#d2-lab2">Lab · Conditional Access</a>
+  </div>
+</section>
+
+<section id="d2-quiz">
+  <h2>📝 Practice quiz — 12 questions</h2>
+  <p class="sub">Same format. Every option explained, options shuffled on each attempt.</p>
+  <div class="note">
+    <strong>Watch the licence keywords.</strong> Several questions in this domain are decided by one word in the scenario. Risk-based policies or just-in-time roles mean P2. If you can't justify the tier, you're guessing.
+  </div>
+  <div class="scorebar">
+    <span class="lbl">Answered</span><span class="val" id="answered-d2">0 / 12</span>
+    <div class="track"><div class="fill" id="fill-d2"></div></div>
+    <span class="lbl">Correct</span><span class="val" id="score-d2">0</span>
+  </div>
+  <div id="questions-d2"></div>
+  <div class="result" id="result-d2">
+    <div class="big" id="finalScore-d2">0 / 12</div>
+    <p class="msg" id="finalMsg-d2"></p>
+    <button class="btn ghost" onclick="resetQuiz('d2')">Try again</button>
+  </div>
+</section>
+
+<section id="d2-lab1">
+  <h2>🧪 Lab 3 — The licensing table</h2>
+  <p class="sub">For each feature, pick the <strong>minimum</strong> Entra ID tier that includes it. This table alone is worth several exam questions.</p>
+  <div class="lab">
+    <h3>What's the cheapest tier that gets me this?</h3>
+    <p class="meta">Time: 5 minutes · From memory. "Minimum" matters: Conditional Access works in P2 too, but P1 is the answer.</p>
+    <div class="tblwrap">
+      <table id="licTable">
+        <thead><tr><th>Feature</th><th>Minimum tier required</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkLic()">Check my answers</button>
+      <button class="btn ghost" onclick="resetLic()">Clear</button>
+    </div>
+    <div class="feedback" id="licFeedback"></div>
+  </div>
+</section>
+
+<section id="d2-lab2">
+  <h2>🧪 Lab 4 — Build a Conditional Access policy</h2>
+  <p class="sub">Conditional Access is an if-this-then-that engine. Read each requirement and pick the condition and the control that implement it.</p>
+  <div class="lab">
+    <h3>Translate the requirement into a policy</h3>
+    <p class="meta">Time: 10 minutes · This is exactly how the exam phrases its Conditional Access scenarios.</p>
+    <div id="caList"></div>
+    <div class="row">
+      <button class="btn" onclick="checkCA()">Check my answers</button>
+      <button class="btn ghost" onclick="resetCA()">Clear</button>
+    </div>
+    <div class="feedback" id="caFeedback"></div>
+  </div>
+</section>
+
+</div>
+
+<!-- ==================== SHARED ==================== -->
 <section id="next">
   <div class="cta">
     <h3>This is the companion to the SC-900 Study Series</h3>
     <p>The full write-up has the diagrams, the exam traps and the explanations behind every one of these questions — four domains, free labs and a mock exam.</p>
-    <a class="btn" href="https://dev.to/cyberttopic/sc-900-part-1-security-compliance-and-identity-concepts-with-labs-and-12-practice-questions-1kp9" target="_blank" rel="noopener">Read the series on DEV →</a>
+    <a class="btn" href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener">Read the series on DEV →</a>
   </div>
 </section>
 
 <footer>
-  <p>Built as a free study companion for Microsoft SC-900 · Domain 1.<br>
+  <p>Free study companion for Microsoft SC-900. Domains 3 and 4 are added as the series is published.<br>
   Always confirm the current objectives on the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-900" target="_blank" rel="noopener">official study guide</a> before your exam.</p>
 </footer>
 
 </div>
 
 <script>
-/* ================= QUIZ DATA ================= */
-const QUESTIONS = [
+/* ================= QUESTION BANKS ================= */
+const BANKS = {
+
+d1: [
 {
   q: "A company moves its email to Microsoft 365 (SaaS). Who is responsible for managing user identities?",
   correct: 1,
@@ -416,123 +506,305 @@ const QUESTIONS = [
      why:"A policy engine that decides whether to grant access based on signals. It enforces conditions, but it doesn't establish trust with a partner directory — and it is domain 2 material."}
   ]
 }
-];
+],
 
+d2: [
+{
+  q: "Which Microsoft Entra ID licence tier is the minimum required to create a Conditional Access policy?",
+  correct: 1,
+  options: [
+    {t:"Free",
+     why:"Free gives you <strong>security defaults</strong> — a fixed, all-or-nothing baseline you cannot customize. The moment you need a policy with exceptions or conditions, you need P1."},
+    {t:"P1",
+     why:"Conditional Access starts at P1. Read the word <em>minimum</em>: P2 also includes it, but the question asks for the cheapest tier that unlocks it. This single fact decides several exam questions."},
+    {t:"P2",
+     why:"P2 does include Conditional Access, but it is not the minimum. P2 is what you need for the <em>risk-based</em> extras: Identity Protection and PIM."},
+    {t:"Microsoft Entra ID Governance",
+     why:"Governance is a separate SKU covering entitlement management, access reviews and lifecycle workflows. It is not what unlocks Conditional Access."}
+  ]
+},
+{
+  q: "You must guarantee that an administrator holds the Global Administrator role for only 2 hours, after approval. Which feature?",
+  correct: 1,
+  options: [
+    {t:"Access reviews",
+     why:"Access reviews ask periodically whether someone <em>still</em> needs access. They audit standing access; they don't grant it temporarily."},
+    {t:"Privileged Identity Management (PIM)",
+     why:"PIM makes the role <strong>eligible</strong> instead of permanently assigned. The admin activates it with justification and approval, for a limited window, and it expires automatically. This is the exam's favourite example of just-in-time access. Requires P2."},
+    {t:"A Conditional Access session control",
+     why:"Session controls limit sign-in frequency or restrict what the session can do. They constrain the session, not the role assignment."},
+    {t:"An administrative unit",
+     why:"Administrative units scope a role to part of the directory — <em>where</em> the admin has power, not <em>for how long</em>."}
+  ]
+},
+{
+  q: "Which hybrid identity method validates the password on-premises, syncs no passwords to the cloud, and needs no extra federation infrastructure?",
+  correct: 1,
+  options: [
+    {t:"Password hash synchronization (PHS)",
+     why:"PHS syncs a hash of the password hash to Entra ID, so validation happens in the cloud. It's the simplest option and it keeps working if your on-prem servers go down — but the question rules it out by saying nothing syncs."},
+    {t:"Pass-through authentication (PTA)",
+     why:"PTA forwards the credential to a lightweight agent on your network, which validates it against your domain controller. Nothing is stored in the cloud, and there's no federation farm to build."},
+    {t:"Federation with AD FS",
+     why:"AD FS also validates on-premises without syncing passwords — but it requires you to deploy and maintain separate federation servers. That's the clause in the question that excludes it. Watch for this distinction; it's how the exam separates PTA from federation."},
+    {t:"Microsoft Entra Connect cloud sync",
+     why:"Cloud sync is a provisioning mechanism (a lightweight agent that syncs objects), not an authentication method. It still relies on PHS or PTA for sign-in."}
+  ]
+},
+{
+  q: "A group must automatically contain every user whose department attribute is \"Sales\". What do you configure?",
+  correct: 2,
+  options: [
+    {t:"An assigned security group",
+     why:"Assigned means someone adds and removes members by hand. It will never update itself when an attribute changes."},
+    {t:"A Microsoft 365 group with assigned membership",
+     why:"Wrong on both counts: the membership is still manual, and a Microsoft 365 group is for collaboration (mailbox, SharePoint site, Teams) rather than for this."},
+    {t:"A dynamic user group with a membership rule",
+     why:"The rule <code>user.department -eq \"Sales\"</code> is evaluated by Entra, so membership follows the attribute automatically. Requires P1 — that pairing (dynamic groups → P1) is itself an exam question."},
+    {t:"An administrative unit",
+     why:"An administrative unit scopes admin permissions to a subset of the directory. It is not a group and it grants nothing to its members."}
+  ]
+},
+{
+  q: "Which authentication method is considered phishing-resistant?",
+  correct: 3,
+  options: [
+    {t:"A code sent by SMS",
+     why:"The weakest of the multifactor options and explicitly discouraged by Microsoft: vulnerable to SIM swapping and to being read out to an attacker on the phone."},
+    {t:"Microsoft Authenticator with number matching",
+     why:"Strong, cheap, and a big improvement over plain push approval — number matching kills MFA fatigue attacks. But it is not classified as phishing-resistant, because the user is still typing a number they were shown."},
+    {t:"An OATH software token",
+     why:"A rotating six-digit code. Better than a password alone, but the code can be phished exactly like a password, in real time."},
+    {t:"A FIDO2 security key",
+     why:"The credential is bound cryptographically to the site, so it simply won't work on a lookalike domain — there's nothing for the user to hand over. Windows Hello for Business and certificate-based authentication are in the same phishing-resistant category."}
+  ]
+},
+{
+  q: "What is the main purpose of an administrative unit in Microsoft Entra ID?",
+  correct: 2,
+  options: [
+    {t:"To group users so licences can be assigned in bulk",
+     why:"That's group-based licensing, which uses groups and needs P1. Administrative units don't assign anything to their members."},
+    {t:"To replace on-premises organizational units and apply Group Policy",
+     why:"The name invites this mistake, but Entra ID has no GPOs and is not a domain controller. Device configuration in the cloud comes from Intune policies instead."},
+    {t:"To scope administrative permissions to a subset of the directory",
+     why:"The textbook example: a help desk admin who can reset passwords, but only for users in the Madrid office. It's least privilege applied to the <em>reach</em> of a role, not to the role itself."},
+    {t:"To segment network access between departments",
+     why:"That's network segmentation, an infrastructure control. Administrative units have nothing to do with the network."}
+  ]
+},
+{
+  q: "Which feature lets users reset their own password after verifying with registered methods?",
+  correct: 1,
+  options: [
+    {t:"Entra ID Password Protection",
+     why:"Password Protection blocks weak and custom-banned passwords, including on-premises when the agent is deployed. It governs which passwords are allowed — it doesn't reset them."},
+    {t:"Self-service password reset (SSPR)",
+     why:"The user proves identity with the methods they registered and sets a new password without calling anyone. Its real selling point is the help desk ticket volume it removes — the reason it appears in business-value questions."},
+    {t:"Passwordless authentication",
+     why:"Passwordless removes the password from sign-in altogether (Authenticator, FIDO2, Windows Hello). Related goal, different feature — and if there's no password, there's nothing to reset."},
+    {t:"Access reviews",
+     why:"Access reviews are governance: periodically confirming that people still need the access they hold. Nothing to do with credentials."}
+  ]
+},
+{
+  q: "An app running in Azure needs to read secrets from a key vault without storing any credentials in code. What do you use?",
+  correct: 1,
+  options: [
+    {t:"A service principal with a client secret",
+     why:"It works, but you're back to holding a secret: it lives somewhere, it has to be rotated, and it can leak into source control. The question explicitly rules that out."},
+    {t:"A managed identity",
+     why:"Azure creates the identity, and rotates the credential for you. Nothing goes in the code and there is nothing to leak. A managed identity <em>is</em> a service principal — one that the platform manages, which is exactly the distinction the exam wants."},
+    {t:"A registered application with a certificate",
+     why:"Better than a client secret, but you still own the certificate lifecycle: storage, expiry, renewal. Still a credential you manage."},
+    {t:"A guest (B2B) account with the right permissions",
+     why:"Guest accounts are for people from other organizations. Using a user account for a workload is exactly the anti-pattern workload identities exist to fix."}
+  ]
+},
+{
+  q: "You enabled security defaults. Now you need one service account exempt from MFA. What do you do?",
+  correct: 2,
+  options: [
+    {t:"Add the account to the exclusion list in security defaults",
+     why:"There is no exclusion list. Security defaults are deliberately not configurable — that's the whole design."},
+    {t:"Create a named location and exclude the account from it",
+     why:"Named locations are a Conditional Access concept, and security defaults don't read them. You can't reach in and change the behaviour."},
+    {t:"Turn security defaults off and implement Conditional Access instead",
+     why:"Security defaults are all-or-nothing, and they cannot coexist with Conditional Access. The moment you need one exception, you move to Conditional Access — which means P1. That upgrade path is a favourite exam scenario."},
+    {t:"Assign the account the Security Reader role",
+     why:"Directory roles grant permissions; they don't exempt anyone from an authentication requirement."}
+  ]
+},
+{
+  q: "Which Microsoft Entra product issues identities for the external customers of a retail application?",
+  correct: 3,
+  options: [
+    {t:"Microsoft Entra ID",
+     why:"Entra ID is for your <strong>workforce</strong> — employees and the guests you invite. Creating member accounts for thousands of consumers is not what it's designed for."},
+    {t:"B2B collaboration",
+     why:"B2B invites users from <em>another organization</em> as guests in your tenant, authenticated by their home tenant. That's partners and contractors, not retail customers who have no corporate tenant."},
+    {t:"Microsoft Entra Verified ID",
+     why:"Verified ID issues decentralized verifiable credentials — a digital diploma or proof of employment. It's not the identity store your app authenticates against."},
+    {t:"Microsoft Entra External ID",
+     why:"Purpose-built for customer and partner identity (it absorbed Azure AD B2C): self-service sign-up, social logins, and branded sign-in pages. If a scenario says \"customers\" or \"consumers\", this is the answer."}
+  ]
+},
+{
+  q: "At minimum, which two components must every Conditional Access policy contain?",
+  correct: 1,
+  options: [
+    {t:"A sign-in risk level and a named location",
+     why:"Both are optional <em>conditions</em>. Risk levels even require Identity Protection (P2). Plenty of valid policies use neither."},
+    {t:"Assignments (who and what it applies to) and access controls (grant or block)",
+     why:"A policy is meaningless without both halves: the assignment defines the users and target resources, and the access control is the decision — block, or grant with requirements like MFA or a compliant device. Conditions only refine the assignment."},
+    {t:"A licence assignment and a security group",
+     why:"Licensing is a prerequisite for the tenant, not a component of the policy. And you can target all users or directory roles without any group."},
+    {t:"An administrative unit and a directory role",
+     why:"Neither is required. You can target an administrative unit's users or a directory role, but a policy scoped to \"all users\" is perfectly valid."}
+  ]
+},
+{
+  q: "Which feature periodically asks reviewers to confirm whether users still need their assigned access?",
+  correct: 2,
+  options: [
+    {t:"Entitlement management",
+     why:"Entitlement management is about <em>granting</em>: access packages that bundle groups, apps and sites, with an approval workflow and an expiry date. It's the front door, not the recurring audit."},
+    {t:"Privileged Identity Management (PIM)",
+     why:"PIM handles just-in-time activation of privileged roles. Close cousin — both are P2 governance — but PIM is about temporary elevation, not periodic attestation."},
+    {t:"Access reviews",
+     why:"Exactly this: on a schedule, the reviewer (a manager, the user themselves, or a chosen approver) confirms or removes the access. It's how organizations stop permission creep. P2 or Entra ID Governance."},
+    {t:"Lifecycle workflows",
+     why:"Lifecycle workflows automate joiner/mover/leaver tasks — provisioning on hire, cleanup on exit. Event-driven, not a recurring review."}
+  ]
+}
+]
+
+};
+
+const COUNTS = { d1: BANKS.d1.length, d2: BANKS.d2.length };
 const KEYS = ["A","B","C","D"];
-let answered = 0, score = 0;
-let VIEW = [];
+const STATE = { d1:{answered:0,score:0,view:[]}, d2:{answered:0,score:0,view:[]} };
 
-/* Options are shuffled on every run, so retaking the quiz tests the concept
-   and not the position of the answer you remember. */
-function shuffleQuestions(){
-  VIEW = QUESTIONS.map(item => {
+const RESULT_MSG = {
+d1: {
+  hi:"Excellent. Domain 1 is done — move on to Domain 2 (Microsoft Entra), which is worth 25–30% of the exam.",
+  mid:"Solid. Reread the section behind each question you missed, then retake this in a couple of days.",
+  lo:"Worth another pass. The gap is almost always one of two things: the shared responsibility model, or hashing vs encryption. Those two produce most of the errors in this domain."
+},
+d2: {
+  hi:"Strong. This domain is a quarter of the exam and you have it. Do Lab 3 once more from memory and move on to Domain 3.",
+  mid:"Good, but the misses in this domain are usually licence tiers. Redo Lab 3 until the Free / P1 / P2 split is automatic.",
+  lo:"Go back to the write-up. Almost every error here comes from three pairs: Conditional Access vs security defaults, P1 vs P2, and Entra ID vs External ID."
+}
+};
+
+/* ================= TABS ================= */
+function showTab(key){
+  ["d1","d2"].forEach(k => {
+    document.getElementById("panel-"+k).classList.toggle("on", k===key);
+    document.getElementById("tab-"+k).classList.toggle("on", k===key);
+  });
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ================= QUIZ ENGINE ================= */
+function shuffleBank(key){
+  STATE[key].view = BANKS[key].map(item => {
     const idx = item.options.map((_, i) => i);
     for (let i = idx.length - 1; i > 0; i--){
       const j = Math.floor(Math.random() * (i + 1));
-      [idx[i], idx[j]] = [idx[j], idx[i]];
+      const t = idx[i]; idx[i] = idx[j]; idx[j] = t;
     }
-    return {
-      q: item.q,
-      options: idx.map(i => item.options[i]),
-      correct: idx.indexOf(item.correct)
-    };
+    return { q:item.q, options:idx.map(i => item.options[i]), correct:idx.indexOf(item.correct) };
   });
 }
 
-function buildQuiz(){
-  shuffleQuestions();
-  const host = document.getElementById("questions");
+function buildQuiz(key){
+  shuffleBank(key);
+  const host = document.getElementById("questions-"+key);
   host.innerHTML = "";
-  VIEW.forEach((item, qi) => {
+  STATE[key].view.forEach((item, qi) => {
     const card = document.createElement("div");
     card.className = "q";
-    card.id = "q" + qi;
-
+    card.id = "q-"+key+"-"+qi;
     let html = '<div class="qhead"><div class="qnum">' + (qi+1) + '</div>'
              + '<p class="qtext">' + item.q + '</p></div><div class="opts">';
-
     item.options.forEach((o, oi) => {
-      html += '<button class="opt" id="o' + qi + '-' + oi + '" onclick="answer(' + qi + ',' + oi + ')">'
+      html += '<button class="opt" id="o-'+key+'-'+qi+'-'+oi+'" onclick="answer(\''+key+'\','+qi+','+oi+')">'
             + '<span class="k">' + KEYS[oi] + '</span><span class="t">' + o.t + '</span></button>'
-            + '<div class="why" id="w' + qi + '-' + oi + '"><span class="tag"></span>'
-            + '<span class="wt">' + o.why + '</span></div>';
+            + '<div class="why" id="w-'+key+'-'+qi+'-'+oi+'"><span class="tag"></span><span>' + o.why + '</span></div>';
     });
-
-    html += '</div><div class="verdict" id="v' + qi + '"></div>';
+    html += '</div><div class="verdict" id="v-'+key+'-'+qi+'"></div>';
     card.innerHTML = html;
     host.appendChild(card);
   });
 }
 
-function answer(qi, oi){
-  const item = VIEW[qi];
-  const card = document.getElementById("q" + qi);
+function answer(key, qi, oi){
+  const item = STATE[key].view[qi];
+  const card = document.getElementById("q-"+key+"-"+qi);
   if (card.dataset.done) return;
   card.dataset.done = "1";
 
   const right = (oi === item.correct);
-  answered++;
-  if (right) score++;
+  STATE[key].answered++;
+  if (right) STATE[key].score++;
 
   item.options.forEach((o, i) => {
-    const btn = document.getElementById("o" + qi + "-" + i);
-    const why = document.getElementById("w" + qi + "-" + i);
+    const btn = document.getElementById("o-"+key+"-"+qi+"-"+i);
+    const why = document.getElementById("w-"+key+"-"+qi+"-"+i);
     btn.disabled = true;
     const isCorrect = (i === item.correct);
-
     if (isCorrect)      btn.classList.add("ok");
     else if (i === oi)  btn.classList.add("no");
     else                btn.classList.add("dim");
-
     why.classList.add("show", isCorrect ? "y" : "n");
     why.querySelector(".tag").textContent = isCorrect ? "✅ Correct —" : "❌ Incorrect —";
   });
 
-  const v = document.getElementById("v" + qi);
+  const v = document.getElementById("v-"+key+"-"+qi);
   v.classList.add("show", right ? "y" : "n");
   v.textContent = right
     ? "✅ Correct. Answer " + KEYS[item.correct] + "."
     : "❌ Not quite. The correct answer is " + KEYS[item.correct] + " — " + item.options[item.correct].t + ".";
 
-  updateBar();
-  if (answered === QUESTIONS.length) showResult();
+  updateBar(key);
+  if (STATE[key].answered === COUNTS[key]) showResult(key);
 }
 
-function updateBar(){
-  document.getElementById("answered").textContent = answered + " / " + QUESTIONS.length;
-  document.getElementById("score").textContent = score;
-  document.getElementById("fill").style.width = (answered / QUESTIONS.length * 100) + "%";
+function updateBar(key){
+  document.getElementById("answered-"+key).textContent = STATE[key].answered + " / " + COUNTS[key];
+  document.getElementById("score-"+key).textContent = STATE[key].score;
+  document.getElementById("fill-"+key).style.width = (STATE[key].answered / COUNTS[key] * 100) + "%";
 }
 
-function showResult(){
-  const box = document.getElementById("result");
-  document.getElementById("finalScore").textContent = score + " / " + QUESTIONS.length;
-  let msg;
-  if (score >= 11)     msg = "Excellent. Domain 1 is done — move on to Part 2 (Microsoft Entra), which is worth 25–30% of the exam.";
-  else if (score >= 9) msg = "Solid. Reread the section behind each question you missed, then come back and retake this in a couple of days.";
-  else                 msg = "Worth another pass. The gap is almost always one of two things: the shared responsibility model, or hashing vs encryption. Those two produce most of the errors in this domain.";
-  document.getElementById("finalMsg").textContent = msg;
+function showResult(key){
+  const box = document.getElementById("result-"+key);
+  const sc = STATE[key].score, n = COUNTS[key];
+  document.getElementById("finalScore-"+key).textContent = sc + " / " + n;
+  const m = RESULT_MSG[key];
+  document.getElementById("finalMsg-"+key).textContent = sc >= n-1 ? m.hi : (sc >= n-3 ? m.mid : m.lo);
   box.classList.add("show");
   box.scrollIntoView({behavior:"smooth", block:"center"});
 }
 
-function resetQuiz(){
-  answered = 0; score = 0;
-  document.getElementById("result").classList.remove("show");
-  buildQuiz();
-  updateBar();
-  document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+function resetQuiz(key){
+  STATE[key].answered = 0; STATE[key].score = 0;
+  document.getElementById("result-"+key).classList.remove("show");
+  buildQuiz(key);
+  updateBar(key);
+  document.getElementById(key+"-quiz").scrollIntoView({behavior:"smooth"});
 }
 
 /* ================= LAB 1: shared responsibility ================= */
 const SR_ROWS = [
-  {r:"Data",                a:["C","C","C","C"], note:"Your data is yours in every model. This row never changes."},
-  {r:"Accounts and identities", a:["C","C","C","C"], note:"Same rule: identities are always the customer's, even in SaaS."},
-  {r:"Operating system",    a:["C","C","M","M"], note:"Yours through IaaS; Microsoft's from PaaS upward. This is the row the exam tests most."},
-  {r:"Physical datacenter", a:["C","M","M","M"], note:"The moment you go to the cloud, the building stops being your problem."}
+  {r:"Data",                    a:["C","C","C","C"]},
+  {r:"Accounts and identities", a:["C","C","C","C"]},
+  {r:"Operating system",        a:["C","C","M","M"]},
+  {r:"Physical datacenter",     a:["C","M","M","M"]}
 ];
 const SR_COLS = ["On-premises","IaaS","PaaS","SaaS"];
-const SR_OPTS = {C:"Customer", S:"Shared", M:"Microsoft"};
+const OWNER = {C:"Customer", S:"Shared", M:"Microsoft"};
 
 function buildSR(){
   const tb = document.querySelector("#srTable tbody");
@@ -541,11 +813,9 @@ function buildSR(){
     const tr = document.createElement("tr");
     let html = "<td>" + row.r + "</td>";
     SR_COLS.forEach((c, ci) => {
-      html += '<td><select id="sr' + ri + '-' + ci + '" aria-label="' + row.r + ' in ' + c + '">'
-            + '<option value="">— choose —</option>'
-            + '<option value="C">Customer</option>'
-            + '<option value="S">Shared</option>'
-            + '<option value="M">Microsoft</option></select></td>';
+      html += '<td><select id="sr'+ri+'-'+ci+'" aria-label="'+row.r+' in '+c+'">'
+            + '<option value="">— choose —</option><option value="C">Customer</option>'
+            + '<option value="S">Shared</option><option value="M">Microsoft</option></select></td>';
     });
     tr.innerHTML = html;
     tb.appendChild(tr);
@@ -558,46 +828,34 @@ function checkSR(){
   SR_ROWS.forEach((row, ri) => {
     SR_COLS.forEach((c, ci) => {
       total++;
-      const sel = document.getElementById("sr" + ri + "-" + ci);
+      const sel = document.getElementById("sr"+ri+"-"+ci);
       sel.classList.remove("ok","no");
       if (!sel.value) { blank++; return; }
       if (sel.value === row.a[ci]) { sel.classList.add("ok"); ok++; }
-      else {
-        sel.classList.add("no");
-        missed.push(row.r + " / " + c + " → <strong>" + SR_OPTS[row.a[ci]] + "</strong>");
-      }
+      else { sel.classList.add("no"); missed.push(row.r + " / " + c + " → <strong>" + OWNER[row.a[ci]] + "</strong>"); }
     });
   });
-
   const fb = document.getElementById("srFeedback");
-  fb.className = "feedback show " + (ok === total ? "y" : "n");
-
   if (blank === total) {
     fb.className = "feedback show n";
     fb.innerHTML = "Fill in the table first — even if you're guessing. Guessing and then seeing the correction is what makes it stick.";
     return;
   }
-
+  fb.className = "feedback show " + (ok === total ? "y" : "n");
   let html = "<strong>" + ok + " / " + total + " correct.</strong>";
-  if (missed.length) {
+  if (missed.length){
     html += "<br>Corrections:<ul style='margin:8px 0 0;padding-left:20px'>";
     missed.forEach(m => html += "<li>" + m + "</li>");
     html += "</ul>";
   }
   if (blank) html += "<br><em>" + blank + " cell(s) left blank.</em>";
-
-  if (ok === total) {
-    html += "<br><br>That's the whole model. Notice the pattern: the top two rows are all Customer, and each column below moves one step toward Microsoft. If you can redraw this table from memory, you've secured a family of exam questions.";
-  } else {
-    html += "<br><br>The rule that fixes most mistakes: <strong>data, devices and identities are always the customer's</strong>, in every model. Everything else shifts to Microsoft as you move right.";
-  }
+  html += ok === total
+    ? "<br><br>That's the whole model. Notice the pattern: the top two rows are all Customer, and each row below moves one step toward Microsoft as you go right. If you can redraw this from memory, you've secured a family of exam questions."
+    : "<br><br>The rule that fixes most mistakes: <strong>data, devices and identities are always the customer's</strong>, in every model. Everything else shifts to Microsoft as you move right.";
   fb.innerHTML = html;
 }
 
-function resetSR(){
-  buildSR();
-  document.getElementById("srFeedback").className = "feedback";
-}
+function resetSR(){ buildSR(); document.getElementById("srFeedback").className = "feedback"; }
 
 /* ================= LAB 2: Zero Trust pillars ================= */
 const PILLARS = [
@@ -615,13 +873,11 @@ function buildPillars(){
   host.innerHTML = "";
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e) { saved = {}; }
-
   PILLARS.forEach((p, i) => {
     const div = document.createElement("div");
     div.className = "pill";
     div.id = "p" + i;
-    div.innerHTML = '<h4>' + (i+1) + '. ' + p.n + '</h4>'
-                  + '<p class="hint">' + p.h + '</p>'
+    div.innerHTML = '<h4>' + (i+1) + '. ' + p.n + '</h4><p class="hint">' + p.h + '</p>'
                   + '<textarea id="pt' + i + '" placeholder="What protects me here today?"></textarea>';
     host.appendChild(div);
     const ta = div.querySelector("textarea");
@@ -632,35 +888,31 @@ function buildPillars(){
 
 function savePillars(){
   const data = {};
-  PILLARS.forEach((p, i) => { data[p.n] = document.getElementById("pt" + i).value; });
+  PILLARS.forEach((p, i) => { data[p.n] = document.getElementById("pt"+i).value; });
   try { localStorage.setItem(STORE, JSON.stringify(data)); } catch(e) {}
 }
 
 function checkPillars(){
   const gaps = [];
   PILLARS.forEach((p, i) => {
-    const box = document.getElementById("p" + i);
-    const val = document.getElementById("pt" + i).value.trim();
+    const box = document.getElementById("p"+i);
+    const val = document.getElementById("pt"+i).value.trim();
     box.classList.toggle("empty", val === "");
     if (val === "") gaps.push(p.n);
   });
-
   const fb = document.getElementById("pillarFeedback");
   fb.className = "feedback show " + (gaps.length ? "n" : "y");
-
-  if (!gaps.length) {
-    fb.innerHTML = "<strong>All six pillars covered.</strong> Now go one level deeper: for each pillar, ask what would happen if that single control failed. If the answer is \"the attacker reaches my data\", that pillar needs a second layer — which is exactly what defense in depth means.";
-  } else {
-    fb.innerHTML = "<strong>" + gaps.length + " gap(s) found: " + gaps.join(", ") + ".</strong>"
+  fb.innerHTML = gaps.length
+    ? "<strong>" + gaps.length + " gap(s) found: " + gaps.join(", ") + ".</strong>"
       + "<br>That is the normal result, and it is the point of the exercise — most people come up empty on <em>data</em> and <em>network</em>."
-      + "<br><br>For each gap, write down the one control you would add first, and why. Two that cost nothing: turn on encrypted backup for the folders you'd hate to lose (data), and change your router's default admin password (network).";
-  }
+      + "<br><br>For each gap, write down the one control you would add first, and why. Two that cost nothing: turn on encrypted backup for the folders you'd hate to lose (data), and change your router's default admin password (network)."
+    : "<strong>All six pillars covered.</strong> Now go one level deeper: for each pillar, ask what would happen if that single control failed. If the answer is \"the attacker reaches my data\", that pillar needs a second layer — which is exactly what defense in depth means.";
 }
 
 function copyNotes(){
   let txt = "SC-900 — My Zero Trust pillar map\n\n";
   PILLARS.forEach((p, i) => {
-    const v = document.getElementById("pt" + i).value.trim();
+    const v = document.getElementById("pt"+i).value.trim();
     txt += p.n + ": " + (v || "(GAP — nothing yet)") + "\n";
   });
   const done = () => {
@@ -670,18 +922,13 @@ function copyNotes(){
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(txt).then(done).catch(() => fallbackCopy(txt, done));
-  } else {
-    fallbackCopy(txt, done);
-  }
+  } else { fallbackCopy(txt, done); }
 }
 
 function fallbackCopy(txt, done){
   const ta = document.createElement("textarea");
-  ta.value = txt;
-  ta.style.position = "fixed";
-  ta.style.opacity = "0";
-  document.body.appendChild(ta);
-  ta.select();
+  ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
   try { document.execCommand("copy"); done(); } catch(e) {}
   document.body.removeChild(ta);
 }
@@ -692,11 +939,143 @@ function resetPillars(){
   document.getElementById("pillarFeedback").className = "feedback";
 }
 
+/* ================= LAB 3: licensing tiers ================= */
+const LIC = [
+  {f:"Security defaults",                              a:"FREE", n:"Free for everyone — and the only protection Free gives you."},
+  {f:"Single sign-on to SaaS apps",                    a:"FREE", n:"Included in Free."},
+  {f:"Self-service password reset with on-premises write-back", a:"P1", n:"Free covers self-service password <em>change</em> for cloud users; reset with write-back to on-premises AD is P1."},
+  {f:"Conditional Access",                             a:"P1",   n:"The headline P1 feature."},
+  {f:"Dynamic group membership",                       a:"P1",   n:"Rule-based membership needs P1."},
+  {f:"Group-based licence assignment",                 a:"P1",   n:"P1."},
+  {f:"Identity Protection (risk-based policies)",      a:"P2",   n:"Risk detections and risk-based Conditional Access are P2."},
+  {f:"Privileged Identity Management (PIM)",           a:"P2",   n:"Just-in-time privileged roles are P2."},
+  {f:"Access reviews",                                 a:"P2",   n:"P2 — also available in the Entra ID Governance SKU."}
+];
+
+function buildLic(){
+  const tb = document.querySelector("#licTable tbody");
+  tb.innerHTML = "";
+  LIC.forEach((row, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + row.f + "</td>"
+      + '<td><select id="lic'+i+'" aria-label="Minimum tier for '+row.f+'">'
+      + '<option value="">— choose —</option><option value="FREE">Free</option>'
+      + '<option value="P1">Entra ID P1</option><option value="P2">Entra ID P2</option></select></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function checkLic(){
+  let ok = 0, blank = 0;
+  const missed = [];
+  LIC.forEach((row, i) => {
+    const sel = document.getElementById("lic"+i);
+    sel.classList.remove("ok","no");
+    if (!sel.value) { blank++; return; }
+    if (sel.value === row.a) { sel.classList.add("ok"); ok++; }
+    else { sel.classList.add("no"); missed.push("<strong>" + row.f + "</strong> → " + (row.a==="FREE"?"Free":"Entra ID "+row.a) + ". " + row.n); }
+  });
+  const fb = document.getElementById("licFeedback");
+  if (blank === LIC.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Pick a tier for each row first, even if you're guessing.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === LIC.length ? "y" : "n");
+  let html = "<strong>" + ok + " / " + LIC.length + " correct.</strong>";
+  if (missed.length){
+    html += "<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " row(s) left blank.</em>";
+  html += ok === LIC.length
+    ? "<br><br>You have the split. The shortcut that makes it stick: <strong>Free = a fixed baseline. P1 = you write the policies. P2 = the policies react to risk, and privileged access becomes temporary.</strong>"
+    : "<br><br>Use this shortcut: <strong>Free = a fixed baseline you can't customize. P1 = you write your own policies (Conditional Access, dynamic groups). P2 = risk and time enter the picture (Identity Protection, PIM, access reviews).</strong> Packaging changes over time — confirm current tiers on Microsoft Learn before your exam.";
+  fb.innerHTML = html;
+}
+
+function resetLic(){ buildLic(); document.getElementById("licFeedback").className = "feedback"; }
+
+/* ================= LAB 4: Conditional Access builder ================= */
+const CA_IF = [
+  "The user is assigned an administrator role",
+  "The user is signing in from outside a trusted named location",
+  "The target resource is SharePoint Online",
+  "The sign-in risk level is high",
+  "The client app is a web browser",
+  "The user is a guest from another tenant"
+];
+const CA_THEN = [
+  "Require multifactor authentication",
+  "Block access",
+  "Require the device to be marked as compliant",
+  "Require a password change",
+  "Grant access with no additional controls",
+  "Require the user to accept the terms of use"
+];
+const CA_CASES = [
+  {r:"Administrators must always use MFA, wherever they sign in from.",
+   i:0, t:0,
+   why:"Assign the policy to the administrator <em>roles</em> rather than to a group of named people — that way a newly promoted admin is covered automatically. Nothing about location is needed, because the requirement says <em>wherever</em>."},
+  {r:"The finance application must be unreachable from outside the country.",
+   i:1, t:1,
+   why:"Create a named location for your country, then block anything outside it. Note the verb: \"unreachable\" is a block, not an MFA prompt. If the requirement had said \"extra verification outside the country\", the control would be MFA instead."},
+  {r:"Only company-managed, compliant devices may open SharePoint Online.",
+   i:2, t:2,
+   why:"Target the resource (SharePoint Online) and require a compliant device. Compliance is evaluated by Intune, which is the usual follow-up question: Conditional Access asks whether the device is compliant, Intune decides what compliant means."}
+];
+
+function buildCA(){
+  const host = document.getElementById("caList");
+  host.innerHTML = "";
+  CA_CASES.forEach((c, i) => {
+    const div = document.createElement("div");
+    div.className = "ca";
+    let optsIf = '<option value="">— choose the condition —</option>';
+    CA_IF.forEach((o, k) => optsIf += '<option value="'+k+'">'+o+'</option>');
+    let optsThen = '<option value="">— choose the control —</option>';
+    CA_THEN.forEach((o, k) => optsThen += '<option value="'+k+'">'+o+'</option>');
+    div.innerHTML = '<h4>' + (i+1) + '. ' + c.r + '</h4><div class="pair">'
+      + '<div><label>IF</label><select id="caif'+i+'">'+optsIf+'</select></div>'
+      + '<div><label>THEN</label><select id="cath'+i+'">'+optsThen+'</select></div></div>';
+    host.appendChild(div);
+  });
+}
+
+function checkCA(){
+  let ok = 0, blank = 0;
+  let html = "";
+  CA_CASES.forEach((c, i) => {
+    const a = document.getElementById("caif"+i), b = document.getElementById("cath"+i);
+    a.classList.remove("ok","no"); b.classList.remove("no","ok");
+    if (!a.value || !b.value) { blank++; return; }
+    const gi = (parseInt(a.value,10) === c.i), gt = (parseInt(b.value,10) === c.t);
+    a.classList.add(gi ? "ok" : "no");
+    b.classList.add(gt ? "ok" : "no");
+    if (gi && gt) ok++;
+    html += "<li><strong>" + (i+1) + ".</strong> IF " + CA_IF[c.i] + " → THEN " + CA_THEN[c.t] + ".<br>" + c.why + "</li>";
+  });
+  const fb = document.getElementById("caFeedback");
+  if (blank === CA_CASES.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Choose a condition and a control for each requirement first.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === CA_CASES.length ? "y" : "n");
+  let out = "<strong>" + ok + " / " + CA_CASES.length + " policies correct.</strong>";
+  if (html) out += "<ul style='margin:8px 0 0;padding-left:20px'>" + html + "</ul>";
+  if (blank) out += "<em>" + blank + " requirement(s) left incomplete.</em><br>";
+  out += "<br><strong>The habit to build:</strong> read the verb in the requirement. \"Must verify\" → require MFA. \"Must not reach\" → block. \"Only managed devices\" → require compliant device. And in real life, always set a new policy to <em>Report-only</em> first, and exclude a break-glass account.";
+  fb.innerHTML = out;
+}
+
+function resetCA(){ buildCA(); document.getElementById("caFeedback").className = "feedback"; }
+
 /* ================= INIT ================= */
-buildQuiz();
-buildSR();
-buildPillars();
-updateBar();
+buildQuiz("d1"); buildQuiz("d2");
+updateBar("d1");  updateBar("d2");
+buildSR(); buildPillars(); buildLic(); buildCA();
 </script>
 </body>
 </html>
