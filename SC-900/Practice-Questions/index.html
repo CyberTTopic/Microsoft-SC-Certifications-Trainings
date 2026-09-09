@@ -246,6 +246,15 @@ footer a{color:var(--blue)}
   </div>
 </section>
 
+<section>
+  <div class="cta">
+    <h3>Part 1 — Security, compliance and identity concepts</h3>
+    <p>The write-up behind these questions: the diagrams, the exam traps, and the reasoning for every concept in this domain.</p>
+    <!-- 👇 PART 1 URL -->
+    <a class="btn" href="POST1_URL" target="_blank" rel="noopener">Read Part 1 on DEV →</a>
+  </div>
+</section>
+
 </div>
 
 <!-- ==================== DOMAIN 2 ==================== -->
@@ -315,19 +324,21 @@ footer a{color:var(--blue)}
   </div>
 </section>
 
-</div>
-
-<!-- ==================== SHARED ==================== -->
-<section id="next">
+<section>
   <div class="cta">
-    <h3>This is the companion to the SC-900 Study Series</h3>
-    <p>The full write-up has the diagrams, the exam traps and the explanations behind every one of these questions — four domains, free labs and a mock exam.</p>
-    <a class="btn" href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener">Read the series on DEV →</a>
+    <h3>Part 2 — Microsoft Entra capabilities</h3>
+    <p>Tenant objects, hybrid identity, authentication methods, Conditional Access and the licensing table — explained with diagrams.</p>
+    <!-- 👇 PART 2 URL -->
+    <a class="btn" href="POST2_URL" target="_blank" rel="noopener">Read Part 2 on DEV →</a>
   </div>
 </section>
 
+</div>
+
+
 <footer>
-  <p>Free study companion for Microsoft SC-900. Domains 3 and 4 are added as the series is published.<br>
+  <p><a href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener"><strong>Read the whole SC-900 series on DEV →</strong></a><br>
+  Free study companion for Microsoft SC-900. Domains 3 and 4 are added as the series is published.<br>
   Always confirm the current objectives on the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-900" target="_blank" rel="noopener">official study guide</a> before your exam.</p>
 </footer>
 
@@ -699,13 +710,32 @@ d2: {
 };
 
 /* ================= TABS ================= */
-function showTab(key){
+function setTab(key){
   ["d1","d2"].forEach(k => {
     document.getElementById("panel-"+k).classList.toggle("on", k===key);
     document.getElementById("tab-"+k).classList.toggle("on", k===key);
   });
+}
+
+function showTab(key){
+  setTab(key);
+  if (history.replaceState) history.replaceState(null, "", "#" + key);
   window.scrollTo({top:0, behavior:"smooth"});
 }
+
+/* Deep links: #d2, #d2-quiz, #d1-lab1 ... open the right tab and scroll there,
+   so the Part 2 write-up can link straight into the Entra questions. */
+function applyHash(){
+  const h = location.hash;
+  if (!h) return;
+  const key = h.indexOf("#d2") === 0 ? "d2" : (h.indexOf("#d1") === 0 ? "d1" : null);
+  if (!key) return;
+  setTab(key);
+  let el = null;
+  try { el = document.querySelector(h); } catch(e) { el = null; }
+  if (el) setTimeout(() => el.scrollIntoView({behavior:"smooth", block:"start"}), 60);
+}
+window.addEventListener("hashchange", applyHash);
 
 /* ================= QUIZ ENGINE ================= */
 function shuffleBank(key){
@@ -1076,6 +1106,7 @@ function resetCA(){ buildCA(); document.getElementById("caFeedback").className =
 buildQuiz("d1"); buildQuiz("d2");
 updateBar("d1");  updateBar("d2");
 buildSR(); buildPillars(); buildLic(); buildCA();
+applyHash();
 </script>
 </body>
 </html>
