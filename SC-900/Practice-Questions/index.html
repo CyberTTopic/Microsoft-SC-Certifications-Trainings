@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SC-900 Interactive Quiz &amp; Labs — Domains 1 and 2</title>
-<meta name="description" content="Free interactive practice for Microsoft SC-900: 24 multiple-choice questions where every option is explained, plus four self-grading lab exercises covering the shared responsibility model, Zero Trust, Entra ID licensing and Conditional Access.">
+<title>SC-900 Interactive Quiz &amp; Labs — Domains 1 to 3</title>
+<meta name="description" content="Free interactive practice for Microsoft SC-900: 36 multiple-choice questions where every option is explained, plus six self-grading lab exercises covering shared responsibility, Zero Trust, Entra ID licensing, Conditional Access, the Defender family and Azure network security.">
 <meta property="og:title" content="SC-900 Interactive Quiz &amp; Labs">
-<meta property="og:description" content="24 questions with every option explained, plus four self-grading lab exercises. Free companion to the SC-900 Study Series.">
+<meta property="og:description" content="36 questions with every option explained, plus six self-grading lab exercises. Free companion to the SC-900 Study Series.">
 <meta property="og:type" content="website">
 <style>
 :root{
@@ -163,9 +163,9 @@ footer a{color:var(--blue)}
     <h1>Interactive quiz &amp; labs</h1>
     <p>Exam-style questions where <strong>every option is explained</strong> — why the right one is right, and why each wrong one is wrong — plus self-grading lab exercises. Free companion to the written series.</p>
     <div class="badges">
-      <span class="badge">24 questions</span>
-      <span class="badge">4 interactive labs</span>
-      <span class="badge">Domains 1–2 of 4</span>
+      <span class="badge">36 questions</span>
+      <span class="badge">6 interactive labs</span>
+      <span class="badge">Domains 1–3 of 4</span>
       <span class="badge">Objectives updated 28 July 2026</span>
     </div>
   </div>
@@ -174,6 +174,7 @@ footer a{color:var(--blue)}
 <div class="tabs"><div class="wrap">
   <button class="tab on" id="tab-d1" onclick="showTab('d1')">Domain 1 · Concepts<span class="w">10–15% of the exam</span></button>
   <button class="tab" id="tab-d2" onclick="showTab('d2')">Domain 2 · Microsoft Entra<span class="w">25–30% of the exam</span></button>
+  <button class="tab" id="tab-d3" onclick="showTab('d3')">Domain 3 · Security solutions<span class="w">35–40% of the exam</span></button>
 </div></div>
 
 <div class="wrap">
@@ -251,7 +252,7 @@ footer a{color:var(--blue)}
     <h3>Part 1 — Security, compliance and identity concepts</h3>
     <p>The write-up behind these questions: the diagrams, the exam traps, and the reasoning for every concept in this domain.</p>
     <!-- 👇 PART 1 URL -->
-    <a class="btn" href="https://dev.to/cyberttopic/sc-900-part-1-security-compliance-and-identity-concepts-with-labs-and-12-practice-questions-1kp9" target="_blank" rel="noopener">Read Part 1 on DEV →</a>
+    <a class="btn" href="POST1_URL" target="_blank" rel="noopener">Read Part 1 on DEV →</a>
   </div>
 </section>
 
@@ -329,7 +330,90 @@ footer a{color:var(--blue)}
     <h3>Part 2 — Microsoft Entra capabilities</h3>
     <p>Tenant objects, hybrid identity, authentication methods, Conditional Access and the licensing table — explained with diagrams.</p>
     <!-- 👇 PART 2 URL -->
-    <a class="btn" href="https://dev.to/cyberttopic/sc-900-part-2-microsoft-entra-capabilities-diagrams-labs-and-an-interactive-quiz-5hee" target="_blank" rel="noopener">Read Part 2 on DEV →</a>
+    <a class="btn" href="POST2_URL" target="_blank" rel="noopener">Read Part 2 on DEV →</a>
+  </div>
+</section>
+
+</div>
+
+<!-- ==================== DOMAIN 3 ==================== -->
+<div class="panel" id="panel-d3">
+
+<section>
+  <h2>Domain 3 — Microsoft security solutions</h2>
+  <p class="sub">The biggest domain of the exam, and the one people lose points on for a silly reason: nine products whose names all start with "Microsoft Defender". The fix is one mental model — every Defender protects a different surface.</p>
+  <div class="jump">
+    <a href="#d3-quiz">12 questions</a>
+    <a href="#d3-lab1">Lab · Which Defender?</a>
+    <a href="#d3-lab2">Lab · Azure network security</a>
+  </div>
+</section>
+
+<section id="d3-quiz">
+  <h2>📝 Practice quiz — 12 questions</h2>
+  <p class="sub">Same format. Every option explained, options shuffled on each attempt.</p>
+  <div class="note">
+    <strong>Ask one question before you answer:</strong> what is being protected here — a device, a mailbox, on-premises Active Directory, a SaaS app, or cloud infrastructure? Most of this domain resolves the moment you name the surface.
+  </div>
+  <div class="scorebar">
+    <span class="lbl">Answered</span><span class="val" id="answered-d3">0 / 12</span>
+    <div class="track"><div class="fill" id="fill-d3"></div></div>
+    <span class="lbl">Correct</span><span class="val" id="score-d3">0</span>
+  </div>
+  <div id="questions-d3"></div>
+  <div class="result" id="result-d3">
+    <div class="big" id="finalScore-d3">0 / 12</div>
+    <p class="msg" id="finalMsg-d3"></p>
+    <button class="btn ghost" onclick="resetQuiz('d3')">Try again</button>
+  </div>
+</section>
+
+<section id="d3-lab1">
+  <h2>🧪 Lab 5 — Which Defender catches this?</h2>
+  <p class="sub">Six incidents. For each one, name the product that would detect it. This is the single most useful exercise in the domain.</p>
+  <div class="lab">
+    <h3>Match the incident to the product</h3>
+    <p class="meta">Time: 5 minutes · From memory. Say the surface out loud before you choose: device, mailbox, on-prem AD, SaaS app, cloud resource, or cloud identity.</p>
+    <div class="tblwrap">
+      <table id="xdrTable">
+        <thead><tr><th>Incident</th><th>Which product detects it?</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkXDR()">Check my answers</button>
+      <button class="btn ghost" onclick="resetXDR()">Clear</button>
+    </div>
+    <div class="feedback" id="xdrFeedback"></div>
+  </div>
+</section>
+
+<section id="d3-lab2">
+  <h2>🧪 Lab 6 — Azure network security</h2>
+  <p class="sub">You don't have to configure these on the exam. You do have to recognize which one solves which requirement.</p>
+  <div class="lab">
+    <h3>Pick the right service</h3>
+    <p class="meta">Time: 5 minutes · Watch the layer: a rule about ports and IPs is not the same as a rule about an HTTP payload.</p>
+    <div class="tblwrap">
+      <table id="netTable">
+        <thead><tr><th>Requirement</th><th>Which Azure service?</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkNet()">Check my answers</button>
+      <button class="btn ghost" onclick="resetNet()">Clear</button>
+    </div>
+    <div class="feedback" id="netFeedback"></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta">
+    <h3>Part 3 — Microsoft security solutions</h3>
+    <p>The Defender XDR family, Defender for Cloud, Microsoft Sentinel and Azure network security — with the two diagrams that stop you mixing up nine similar names.</p>
+    <!-- 👇 PART 3 URL -->
+    <a class="btn" href="POST3_URL" target="_blank" rel="noopener">Read Part 3 on DEV →</a>
   </div>
 </section>
 
@@ -338,7 +422,7 @@ footer a{color:var(--blue)}
 
 <footer>
   <p><a href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener"><strong>Read the whole SC-900 series on DEV →</strong></a><br>
-  Free study companion for Microsoft SC-900. Domains 3 and 4 are added as the series is published.<br>
+  Free study companion for Microsoft SC-900. Domain 4 is added as the series is published.<br>
   Always confirm the current objectives on the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-900" target="_blank" rel="noopener">official study guide</a> before your exam.</p>
 </footer>
 
@@ -688,13 +772,186 @@ d2: [
      why:"Lifecycle workflows automate joiner/mover/leaver tasks — provisioning on hire, cleanup on exit. Event-driven, not a recurring review."}
   ]
 }
+],
+
+d3: [
+{
+  q: "Which product detects lateral movement and reconnaissance inside on-premises Active Directory?",
+  correct: 1,
+  options: [
+    {t:"Microsoft Defender for Endpoint",
+     why:"Protects the device itself — malicious processes, ransomware behaviour, EDR detections. It would see the compromised laptop, not the attacker's path through your domain controllers."},
+    {t:"Microsoft Defender for Identity",
+     why:"It reads signals straight from your domain controllers: pass-the-hash, golden ticket, reconnaissance, lateral movement paths. The word <em>on-premises</em> is the giveaway."},
+    {t:"Microsoft Entra ID Protection",
+     why:"The classic trap. Entra ID Protection also deals with identity risk, but only <strong>cloud</strong> identities — risky sign-ins, leaked credentials, impossible travel. Different product, and it's domain 2 material."},
+    {t:"Microsoft Defender for Cloud Apps",
+     why:"A CASB: it watches SaaS applications and shadow IT. It has no visibility into your Active Directory."}
+  ]
+},
+{
+  q: "You need to collect logs from Azure, AWS and an on-premises firewall, correlate them, and automate the response. Which service?",
+  correct: 2,
+  options: [
+    {t:"Microsoft Defender for Cloud",
+     why:"Assesses the posture of cloud resources it monitors. It doesn't ingest logs from an on-premises firewall appliance, and it isn't where you build automated response."},
+    {t:"Microsoft Defender XDR",
+     why:"Correlates signals across the Microsoft Defender products into single incidents — powerful, but scoped to the Microsoft estate. A third-party firewall is outside it."},
+    {t:"Microsoft Sentinel",
+     why:"SIEM for the multi-source ingestion and correlation, SOAR for the automation. Anything that says \"collect logs from third-party sources\" or \"across the whole estate\" is Sentinel."},
+    {t:"Azure Monitor on its own",
+     why:"Azure Monitor collects telemetry and Sentinel is built on top of its Log Analytics workspaces — but on its own it gives you no analytics rules, no incidents and no playbooks."}
+  ]
+},
+{
+  q: "Which service gives you a Secure Score with prioritized recommendations for your Azure, AWS and GCP resources?",
+  correct: 1,
+  options: [
+    {t:"Microsoft Secure Score in the Defender portal",
+     why:"Same name, different scope. That one measures your <strong>Microsoft 365</strong> posture — identities, apps, devices. Read the question: it asks about cloud resources across three providers."},
+    {t:"Microsoft Defender for Cloud",
+     why:"CSPM: it continuously assesses multicloud resources and gives you a percentage plus a prioritized list of recommendations, each weighted by impact. Improving it is a prioritization tool, not a compliance certificate."},
+    {t:"Compliance Manager",
+     why:"Measures your organization against regulatory standards like ISO 27001 and GDPR, and lives in Microsoft Purview. It scores compliance actions, not resource configuration."},
+    {t:"A Microsoft Sentinel workbook",
+     why:"Workbooks visualize data you've already ingested. They don't assess resource configuration or produce a posture score."}
+  ]
+},
+{
+  q: "A company wants to discover which unsanctioned SaaS applications its employees are actually using. Which product?",
+  correct: 3,
+  options: [
+    {t:"Microsoft Defender for Cloud",
+     why:"Protects cloud <em>infrastructure</em> — VMs, storage, databases, containers. The two names are almost identical and this is the pair the exam loves; keep them separate: infrastructure vs SaaS."},
+    {t:"Microsoft Defender for Endpoint",
+     why:"It does feed discovery data from managed devices, but it isn't the product that inventories and risk-ranks the apps. It's a signal source, not the answer."},
+    {t:"Microsoft Entra Global Secure Access",
+     why:"Identity-centric network access — securing the connection to internet and private apps. Not a shadow IT discovery tool."},
+    {t:"Microsoft Defender for Cloud Apps",
+     why:"The CASB. Shadow IT discovery is its signature feature: it surfaces which SaaS apps are in use, scores their risk, and lets you sanction or block them."}
+  ]
+},
+{
+  q: "Which Azure service protects a public web application against SQL injection and cross-site scripting?",
+  correct: 2,
+  options: [
+    {t:"A network security group (NSG)",
+     why:"Operates at layers 3 and 4: allow or deny by IP, port and protocol. It cannot read an HTTP payload, so it has no idea whether a request contains an injection attempt."},
+    {t:"Azure Firewall",
+     why:"A managed stateful firewall with threat intelligence and FQDN filtering. Much richer than an NSG, but still not an application-layer inspector for OWASP-style attacks."},
+    {t:"A Web Application Firewall (WAF)",
+     why:"Runs on Application Gateway or Front Door and inspects the HTTP request itself, which is the only place SQL injection and XSS are visible. If the question names a web app and an OWASP attack, it's WAF."},
+    {t:"Azure DDoS Protection",
+     why:"Absorbs volumetric attacks that try to exhaust bandwidth or connections. It deals with volume, not with the content of a request."}
+  ]
+},
+{
+  q: "In EDR and XDR, what does the \"R\" stand for, and what does it add?",
+  correct: 1,
+  options: [
+    {t:"Reporting — dashboards and scheduled reports for management",
+     why:"Reporting is a by-product of every security tool. It is not what the R means, and it adds nothing to how a threat is handled."},
+    {t:"Response — the ability to contain the threat, not just detect it",
+     why:"Detection tells you something happened; response lets you act: isolate the device, stop the process, block the sender, revoke the session. That's the difference between an alert and a resolved incident."},
+    {t:"Risk — a score assigned to each detection",
+     why:"Risk scoring exists (Entra ID Protection, Defender for Cloud Apps), but it isn't what the acronym expands to."},
+    {t:"Recovery — restoring systems from backup after an attack",
+     why:"Recovery is a genuine phase of incident handling, but it belongs to business continuity and backup, not to the EDR/XDR acronym."}
+  ]
+},
+{
+  q: "Administrators need to connect to a virtual machine by RDP without giving that VM a public IP address. Which service?",
+  correct: 2,
+  options: [
+    {t:"Azure Firewall",
+     why:"Controls and filters traffic. It doesn't broker an RDP session for you, and using a DNAT rule would still expose the port through a public IP."},
+    {t:"Just-in-time VM access",
+     why:"A good answer to a different question. JIT (in Defender for Cloud) opens the management port only for a limited window and a specific source — but the VM still needs a public endpoint to reach."},
+    {t:"Azure Bastion",
+     why:"A managed service that brokers RDP and SSH over TLS through the Azure portal. The VM keeps only its private IP, so the management ports are never exposed to the internet."},
+    {t:"A VPN gateway",
+     why:"It does give private connectivity, and it's a valid architecture — but it requires a tunnel from your network. Bastion is the purpose-built, portal-based answer the exam is looking for."}
+  ]
+},
+{
+  q: "In Microsoft Sentinel, automated response to an incident is built with what?",
+  correct: 3,
+  options: [
+    {t:"Analytics rules",
+     why:"Analytics rules are the detection half: they query ingested data and raise incidents. They decide <em>when</em> something fires, not what happens next."},
+    {t:"Workbooks",
+     why:"Workbooks are dashboards for visualizing data. Useful for a SOC screen, but they don't act on anything."},
+    {t:"Hunting queries",
+     why:"Proactive searches an analyst runs to look for threats that no rule caught. Manual by nature — the opposite of automation."},
+    {t:"Playbooks",
+     why:"Built on Azure Logic Apps: disable the user, open a ticket, post to Teams, isolate the device. Playbooks are the SOAR half of Sentinel, and they can be triggered automatically by an incident."}
+  ]
+},
+{
+  q: "Which product protects mailboxes against phishing links and malicious attachments?",
+  correct: 0,
+  options: [
+    {t:"Microsoft Defender for Office 365",
+     why:"Safe Links, Safe Attachments and anti-phishing policies, covering Exchange plus Teams, SharePoint and OneDrive. The surface is email and collaboration."},
+    {t:"Microsoft Defender for Endpoint",
+     why:"It catches what happens <em>after</em> the user clicks — the malicious process on the device. It doesn't inspect the message before delivery."},
+    {t:"Microsoft Defender for Cloud Apps",
+     why:"Covers SaaS usage and shadow IT. Mail flow protection is not its job."},
+    {t:"Microsoft Purview Communication Compliance",
+     why:"Scans internal messages for inappropriate or non-compliant content — a compliance control, not a threat protection one. And it's domain 4."}
+  ]
+},
+{
+  q: "Which Azure service mitigates volumetric attacks designed to exhaust your bandwidth?",
+  correct: 3,
+  options: [
+    {t:"A network security group",
+     why:"Static allow/deny rules. It cannot absorb a flood coming from thousands of changing source addresses."},
+    {t:"A Web Application Firewall",
+     why:"Inspects HTTP requests and does help against application-layer floods, but it isn't the service that absorbs a network-volume attack."},
+    {t:"Azure Bastion",
+     why:"Secure RDP/SSH access. Nothing to do with traffic floods."},
+    {t:"Azure DDoS Protection",
+     why:"Purpose-built: it profiles your normal traffic and mitigates volumetric, protocol and resource-layer attacks. Basic protection is on by default for every Azure resource; the paid tier adds tuning, telemetry and support."}
+  ]
+},
+{
+  q: "What is the primary cost driver of Microsoft Sentinel?",
+  correct: 2,
+  options: [
+    {t:"The number of users in the tenant",
+     why:"That's how identity products are licensed. Sentinel doesn't care how many people you have — it cares how much data they generate."},
+    {t:"The number of analytics rules and playbooks you create",
+     why:"Rules cost nothing to define. Playbook runs have their own small Logic Apps cost, but it's nowhere near the main driver."},
+    {t:"The volume of data ingested and retained",
+     why:"You pay for what you bring in and how long you keep it. That's why choosing log sources is a real design decision, and why teams filter noisy logs before ingestion."},
+    {t:"The number of connected data sources",
+     why:"Connectors themselves are free. Connecting a chatty source is expensive only because of the volume it brings — which is the answer above."}
+  ]
+},
+{
+  q: "An analyst opens one incident and sees correlated alerts from three different Defender products in a single timeline. What capability is that?",
+  correct: 1,
+  options: [
+    {t:"Microsoft Sentinel incident correlation",
+     why:"Sentinel does correlate, and it can ingest Defender alerts — but the scenario describes the native Defender experience. If the question mentions only Defender products and one portal, you're in XDR."},
+    {t:"Microsoft Defender XDR",
+     why:"Extended detection and response: it stitches alerts from Endpoint, Office 365, Identity and Cloud Apps into one incident with an attack story, so the analyst reads one narrative instead of five disconnected alerts."},
+    {t:"Microsoft Defender for Cloud",
+     why:"Assesses and protects cloud workloads. It contributes alerts, but it isn't the correlation layer for the Defender family."},
+    {t:"Microsoft Secure Score",
+     why:"A posture measurement. It tells you what to improve, not what is happening right now."}
+  ]
+}
 ]
 
 };
 
-const COUNTS = { d1: BANKS.d1.length, d2: BANKS.d2.length };
+const DOMAINS = Object.keys(BANKS);
+const COUNTS = {};
+const STATE  = {};
+DOMAINS.forEach(k => { COUNTS[k] = BANKS[k].length; STATE[k] = {answered:0, score:0, view:[]}; });
 const KEYS = ["A","B","C","D"];
-const STATE = { d1:{answered:0,score:0,view:[]}, d2:{answered:0,score:0,view:[]} };
 
 const RESULT_MSG = {
 d1: {
@@ -706,12 +963,17 @@ d2: {
   hi:"Strong. This domain is a quarter of the exam and you have it. Do Lab 3 once more from memory and move on to Domain 3.",
   mid:"Good, but the misses in this domain are usually licence tiers. Redo Lab 3 until the Free / P1 / P2 split is automatic.",
   lo:"Go back to the write-up. Almost every error here comes from three pairs: Conditional Access vs security defaults, P1 vs P2, and Entra ID vs External ID."
+},
+d3: {
+  hi:"That's the biggest domain of the exam handled. If you can also name the surface each Defender protects without looking, you're ready for domain 4.",
+  mid:"Close. Run Lab 5 again — the misses here are almost always two products whose names look alike rather than a concept you don't understand.",
+  lo:"Back to the write-up, and focus on three pairs: Defender for Identity vs Entra ID Protection, Defender for Cloud vs Defender for Cloud Apps, and Sentinel vs Defender for Cloud."
 }
 };
 
 /* ================= TABS ================= */
 function setTab(key){
-  ["d1","d2"].forEach(k => {
+  DOMAINS.forEach(k => {
     document.getElementById("panel-"+k).classList.toggle("on", k===key);
     document.getElementById("tab-"+k).classList.toggle("on", k===key);
   });
@@ -728,7 +990,8 @@ function showTab(key){
 function applyHash(){
   const h = location.hash;
   if (!h) return;
-  const key = h.indexOf("#d2") === 0 ? "d2" : (h.indexOf("#d1") === 0 ? "d1" : null);
+  const m = h.match(/^#(d\d+)/);
+  const key = (m && BANKS[m[1]]) ? m[1] : null;
   if (!key) return;
   setTab(key);
   let el = null;
@@ -1102,10 +1365,131 @@ function checkCA(){
 
 function resetCA(){ buildCA(); document.getElementById("caFeedback").className = "feedback"; }
 
+/* ================= LAB 5: which Defender catches this? ================= */
+const XDR_OPTS = [
+  "Microsoft Defender for Office 365",
+  "Microsoft Defender for Endpoint",
+  "Microsoft Defender for Identity",
+  "Microsoft Defender for Cloud Apps",
+  "Microsoft Defender for Cloud",
+  "Microsoft Entra ID Protection"
+];
+const XDR_ROWS = [
+  {i:"A user receives a fake invoice with a malicious link", a:0, n:"The surface is the mailbox. Safe Links would detonate that URL before the user reaches it."},
+  {i:"Ransomware starts encrypting files on a laptop",       a:1, n:"The surface is the device. This is textbook EDR behaviour detection."},
+  {i:"An attacker runs reconnaissance against a domain controller", a:2, n:"On-premises Active Directory — and only one product watches it."},
+  {i:"An employee uploads the customer list to a personal cloud drive", a:3, n:"A SaaS app outside your control. That's the CASB."},
+  {i:"A storage account is found exposed to the internet",   a:4, n:"Cloud infrastructure posture, not a SaaS app. Note how close this is to the row above — the difference is infrastructure vs application."},
+  {i:"The same account signs in from two countries within five minutes", a:5, n:"Cloud identity risk. Not a Defender product at all — this is the domain 2 crossover the exam likes."}
+];
+
+function buildXDR(){
+  const tb = document.querySelector("#xdrTable tbody");
+  tb.innerHTML = "";
+  XDR_ROWS.forEach((row, i) => {
+    let opts = '<option value="">— choose —</option>';
+    XDR_OPTS.forEach((o, k) => opts += '<option value="'+k+'">'+o+'</option>');
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + row.i + "</td><td><select id=\"xdr"+i+"\">" + opts + "</select></td>";
+    tb.appendChild(tr);
+  });
+}
+
+function checkXDR(){
+  let ok = 0, blank = 0;
+  const missed = [];
+  XDR_ROWS.forEach((row, i) => {
+    const sel = document.getElementById("xdr"+i);
+    sel.classList.remove("ok","no");
+    if (sel.value === "") { blank++; return; }
+    if (parseInt(sel.value,10) === row.a) { sel.classList.add("ok"); ok++; }
+    else { sel.classList.add("no"); missed.push("<strong>" + row.i + "</strong> → " + XDR_OPTS[row.a] + ". " + row.n); }
+  });
+  const fb = document.getElementById("xdrFeedback");
+  if (blank === XDR_ROWS.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Pick a product for each incident first, even if you're guessing.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === XDR_ROWS.length ? "y" : "n");
+  let html = "<strong>" + ok + " / " + XDR_ROWS.length + " correct.</strong>";
+  if (missed.length){
+    html += "<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " row(s) left blank.</em>";
+  html += ok === XDR_ROWS.length
+    ? "<br><br>You have the model. Keep the order of a real attack in your head: <strong>email arrives (Office 365) → user clicks (Endpoint) → attacker moves through AD (Identity) → data leaves to a SaaS app (Cloud Apps)</strong>, with Defender for Cloud watching the infrastructure underneath."
+    : "<br><br>Name the surface before you name the product: mailbox, device, on-prem AD, SaaS app, cloud resource, or cloud identity. Almost every question in this domain collapses once you do.";
+  fb.innerHTML = html;
+}
+
+function resetXDR(){ buildXDR(); document.getElementById("xdrFeedback").className = "feedback"; }
+
+/* ================= LAB 6: Azure network security ================= */
+const NET_OPTS = [
+  "Network security group (NSG)",
+  "Azure Firewall",
+  "Web Application Firewall (WAF)",
+  "Azure DDoS Protection",
+  "Azure Bastion",
+  "Azure Key Vault"
+];
+const NET_ROWS = [
+  {r:"Allow port 443 and deny everything else on a subnet", a:0, n:"Layer 3/4 allow-deny rules on a subnet or NIC. The cheapest, simplest control."},
+  {r:"Filter outbound traffic by fully qualified domain name, with threat intelligence", a:1, n:"A managed stateful firewall. FQDN filtering and threat intel are what separate it from an NSG."},
+  {r:"Stop SQL injection against a public web app", a:2, n:"Only an application-layer inspector can read the HTTP payload."},
+  {r:"Absorb a flood designed to exhaust your bandwidth", a:3, n:"Volumetric attack mitigation, profiled against your normal traffic."},
+  {r:"Give admins RDP access to a VM that has no public IP", a:4, n:"Brokered over TLS through the portal, so management ports stay closed."},
+  {r:"Store an application's certificates and connection secrets", a:5, n:"Keys, secrets and certificates — with access itself controlled by identity."}
+];
+
+function buildNet(){
+  const tb = document.querySelector("#netTable tbody");
+  tb.innerHTML = "";
+  NET_ROWS.forEach((row, i) => {
+    let opts = '<option value="">— choose —</option>';
+    NET_OPTS.forEach((o, k) => opts += '<option value="'+k+'">'+o+'</option>');
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + row.r + "</td><td><select id=\"net"+i+"\">" + opts + "</select></td>";
+    tb.appendChild(tr);
+  });
+}
+
+function checkNet(){
+  let ok = 0, blank = 0;
+  const missed = [];
+  NET_ROWS.forEach((row, i) => {
+    const sel = document.getElementById("net"+i);
+    sel.classList.remove("ok","no");
+    if (sel.value === "") { blank++; return; }
+    if (parseInt(sel.value,10) === row.a) { sel.classList.add("ok"); ok++; }
+    else { sel.classList.add("no"); missed.push("<strong>" + row.r + "</strong> → " + NET_OPTS[row.a] + ". " + row.n); }
+  });
+  const fb = document.getElementById("netFeedback");
+  if (blank === NET_ROWS.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Pick a service for each requirement first.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === NET_ROWS.length ? "y" : "n");
+  let html = "<strong>" + ok + " / " + NET_ROWS.length + " correct.</strong>";
+  if (missed.length){
+    html += "<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " row(s) left blank.</em>";
+  html += "<br><br><strong>The question that sorts these out:</strong> what does the rule need to read? An IP and a port → NSG. A domain name, with threat intelligence → Azure Firewall. The contents of an HTTP request → WAF. Nothing, it's about sheer volume → DDoS Protection.";
+  fb.innerHTML = html;
+}
+
+function resetNet(){ buildNet(); document.getElementById("netFeedback").className = "feedback"; }
+
 /* ================= INIT ================= */
-buildQuiz("d1"); buildQuiz("d2");
-updateBar("d1");  updateBar("d2");
-buildSR(); buildPillars(); buildLic(); buildCA();
+DOMAINS.forEach(k => { buildQuiz(k); updateBar(k); });
+buildSR(); buildPillars(); buildLic(); buildCA(); buildXDR(); buildNet();
 applyHash();
 </script>
 </body>
