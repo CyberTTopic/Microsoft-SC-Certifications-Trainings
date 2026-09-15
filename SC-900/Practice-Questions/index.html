@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SC-900 Interactive Quiz &amp; Labs — Domains 1 to 3</title>
-<meta name="description" content="Free interactive practice for Microsoft SC-900: 36 multiple-choice questions where every option is explained, plus six self-grading lab exercises covering shared responsibility, Zero Trust, Entra ID licensing, Conditional Access, the Defender family and Azure network security.">
+<title>SC-900 Interactive Quiz &amp; Labs — All Four Exam Domains</title>
+<meta name="description" content="Free interactive practice for Microsoft SC-900: 48 multiple-choice questions where every option is explained, plus eight self-grading lab exercises covering shared responsibility, Zero Trust, Entra ID licensing, Conditional Access, the Defender family, Azure network security and Microsoft Purview.">
 <meta property="og:title" content="SC-900 Interactive Quiz &amp; Labs">
-<meta property="og:description" content="36 questions with every option explained, plus six self-grading lab exercises. Free companion to the SC-900 Study Series.">
+<meta property="og:description" content="48 questions with every option explained, plus eight self-grading lab exercises. Free companion to the SC-900 Study Series.">
 <meta property="og:type" content="website">
 <style>
 :root{
@@ -163,9 +163,9 @@ footer a{color:var(--blue)}
     <h1>Interactive quiz &amp; labs</h1>
     <p>Exam-style questions where <strong>every option is explained</strong> — why the right one is right, and why each wrong one is wrong — plus self-grading lab exercises. Free companion to the written series.</p>
     <div class="badges">
-      <span class="badge">36 questions</span>
-      <span class="badge">6 interactive labs</span>
-      <span class="badge">Domains 1–3 of 4</span>
+      <span class="badge">48 questions</span>
+      <span class="badge">8 interactive labs</span>
+      <span class="badge">All four domains</span>
       <span class="badge">Objectives updated 28 July 2026</span>
     </div>
   </div>
@@ -175,6 +175,7 @@ footer a{color:var(--blue)}
   <button class="tab on" id="tab-d1" onclick="showTab('d1')">Domain 1 · Concepts<span class="w">10–15% of the exam</span></button>
   <button class="tab" id="tab-d2" onclick="showTab('d2')">Domain 2 · Microsoft Entra<span class="w">25–30% of the exam</span></button>
   <button class="tab" id="tab-d3" onclick="showTab('d3')">Domain 3 · Security solutions<span class="w">35–40% of the exam</span></button>
+  <button class="tab" id="tab-d4" onclick="showTab('d4')">Domain 4 · Purview &amp; compliance<span class="w">15–20% of the exam</span></button>
 </div></div>
 
 <div class="wrap">
@@ -416,10 +417,93 @@ footer a{color:var(--blue)}
 
 </div>
 
+<!-- ==================== DOMAIN 4 ==================== -->
+<div class="panel" id="panel-d4">
+
+<section>
+  <h2>Domain 4 — Microsoft Purview and compliance</h2>
+  <p class="sub">The smallest domain, and the one most people under-study because it sounds like paperwork. That's a mistake: the content is concrete, the questions are the least ambiguous in the exam, and these are the easiest points available.</p>
+  <div class="jump">
+    <a href="#d4-quiz">12 questions</a>
+    <a href="#d4-lab1">Lab · Which control?</a>
+    <a href="#d4-lab2">Lab · Where do I go?</a>
+  </div>
+</section>
+
+<section id="d4-quiz">
+  <h2>📝 Practice quiz — 12 questions</h2>
+  <p class="sub">Same format. Every option explained, options shuffled on each attempt.</p>
+  <div class="note">
+    <strong>Read the verb in the question.</strong> <em>Protect</em> or <em>encrypt</em> → sensitivity label. <em>Keep</em> or <em>delete</em> → retention. <em>Prevent from leaving</em> → DLP. <em>Find for a legal case</em> → eDiscovery. That one habit answers most of this domain.
+  </div>
+  <div class="scorebar">
+    <span class="lbl">Answered</span><span class="val" id="answered-d4">0 / 12</span>
+    <div class="track"><div class="fill" id="fill-d4"></div></div>
+    <span class="lbl">Correct</span><span class="val" id="score-d4">0</span>
+  </div>
+  <div id="questions-d4"></div>
+  <div class="result" id="result-d4">
+    <div class="big" id="finalScore-d4">0 / 12</div>
+    <p class="msg" id="finalMsg-d4"></p>
+    <button class="btn ghost" onclick="resetQuiz('d4')">Try again</button>
+  </div>
+</section>
+
+<section id="d4-lab1">
+  <h2>🧪 Lab 7 — Which control solves this?</h2>
+  <p class="sub">Six business requirements in plain English. Pick the Purview capability that implements each one.</p>
+  <div class="lab">
+    <h3>Requirement to control</h3>
+    <p class="meta">Time: 5 minutes · This is exactly how the exam phrases domain 4. The requirement is always business language; you supply the product name.</p>
+    <div class="tblwrap">
+      <table id="ctrlTable">
+        <thead><tr><th>Requirement</th><th>Which capability?</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkCtrl()">Check my answers</button>
+      <button class="btn ghost" onclick="resetCtrl()">Clear</button>
+    </div>
+    <div class="feedback" id="ctrlFeedback"></div>
+  </div>
+</section>
+
+<section id="d4-lab2">
+  <h2>🧪 Lab 8 — Where do I go for this?</h2>
+  <p class="sub">Half of domain 4 is knowing which portal or tool answers a given question. These six get confused constantly.</p>
+  <div class="lab">
+    <h3>Question to tool</h3>
+    <p class="meta">Time: 5 minutes · Watch the direction: some of these are about <em>Microsoft's</em> compliance, and some are about <em>yours</em>.</p>
+    <div class="tblwrap">
+      <table id="portalTable">
+        <thead><tr><th>What you need</th><th>Which tool?</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="checkPortal()">Check my answers</button>
+      <button class="btn ghost" onclick="resetPortal()">Clear</button>
+    </div>
+    <div class="feedback" id="portalFeedback"></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta">
+    <h3>Part 4 — Microsoft Purview and compliance</h3>
+    <p>Labels, DLP, retention, records, insider risk and eDiscovery — the data lifecycle in one diagram, plus a lab where you build a DLP rule that blocks a credit card number.</p>
+    <!-- 👇 PART 4 URL -->
+    <a class="btn" href="POST4_URL" target="_blank" rel="noopener">Read Part 4 on DEV →</a>
+  </div>
+</section>
+
+</div>
+
 
 <footer>
   <p><a href="https://dev.to/cyberttopic/sc-900-in-2026-the-complete-study-series-4-domains-free-labs-60-practice-questions-3f6l" target="_blank" rel="noopener"><strong>Read the whole SC-900 series on DEV →</strong></a><br>
-  Free study companion for Microsoft SC-900. Domain 4 is added as the series is published.<br>
+  Free study companion for Microsoft SC-900, covering all four exam domains.<br>
   Always confirm the current objectives on the <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-900" target="_blank" rel="noopener">official study guide</a> before your exam.</p>
 </footer>
 
@@ -940,6 +1024,177 @@ d3: [
      why:"A posture measurement. It tells you what to improve, not what is happening right now."}
   ]
 }
+],
+
+d4: [
+{
+  q: "Which feature protects a document so that the protection travels with the file, even after it is emailed outside your tenant?",
+  correct: 1,
+  options: [
+    {t:"A retention label",
+     why:"Retention answers <em>how long do we keep this</em>, not <em>who may open it</em>. It's a policy applied where the item lives, and it does nothing once the file leaves."},
+    {t:"A sensitivity label with encryption",
+     why:"The encryption and usage rights are embedded in the file itself, so an unauthorized recipient can't open it no matter where it ends up. \"Travels with the file\" is the phrase the exam uses for this."},
+    {t:"A DLP policy",
+     why:"DLP tries to stop the file from leaving in the first place. Once it's out — on a USB stick, on a personal device — DLP has nothing left to enforce."},
+    {t:"Records management",
+     why:"Declaring an item a record makes it immutable inside your tenant for its retention period. That's about editing and deletion, not about who can read it elsewhere."}
+  ]
+},
+{
+  q: "Where do you download Microsoft's own independent audit reports, such as its SOC 2 and ISO certifications?",
+  correct: 2,
+  options: [
+    {t:"Compliance Manager",
+     why:"Points the other way. Compliance Manager scores <strong>your</strong> organization's posture against standards and lists improvement actions. It doesn't publish Microsoft's audits."},
+    {t:"Microsoft Purview Audit",
+     why:"Records what happened <em>in your tenant</em> — who accessed what, who deleted what. A tenant activity log, not a certification library."},
+    {t:"The Service Trust Portal",
+     why:"Microsoft's own audit reports, certifications, pen test summaries and compliance documents live here. If an auditor asks you for Microsoft's SOC 2, this is where you get it."},
+    {t:"The Trust Center",
+     why:"Close, and a fair distractor: the Trust Center is Microsoft's public explanation of its privacy and security principles. The downloadable audit artifacts are in the Service Trust Portal."}
+  ]
+},
+{
+  q: "An employee downloads thousands of files in the days before resigning. Which solution is designed to detect that?",
+  correct: 2,
+  options: [
+    {t:"Communication Compliance",
+     why:"Inspects messages for harassment, regulated content or leaked information. The signal here is file movement, not what someone wrote."},
+    {t:"Data Loss Prevention",
+     why:"DLP can block a specific risky action, but it evaluates each action in isolation. It doesn't build a behavioural picture of a departing employee over days."},
+    {t:"Insider Risk Management",
+     why:"\"Departing employee data theft\" is one of its built-in policy templates: it correlates HR signals, such as a resignation date, with activity such as mass downloads and USB copies. Note it's pseudonymized by default, to protect privacy during triage."},
+    {t:"Microsoft Defender for Cloud Apps",
+     why:"Would see an upload to an unsanctioned SaaS app, and it's a genuine part of a full solution. But the scenario is internal risk, which is a domain 4 answer, not a Defender one."}
+  ]
+},
+{
+  q: "Project contracts must be kept for 7 years, and then a person must approve the deletion. Which two features?",
+  correct: 0,
+  options: [
+    {t:"A retention label plus disposition review",
+     why:"The label enforces the 7 years; disposition review puts a human in front of the deletion at the end of the period, with the approval recorded. That pairing is the whole answer."},
+    {t:"A sensitivity label plus DLP",
+     why:"Those protect and control sharing. Neither has any concept of a retention period or an expiry date."},
+    {t:"A retention policy plus Purview Audit",
+     why:"A retention policy applies broadly to a location rather than to individual contracts, and Audit only records what happened. Nothing here pauses for approval."},
+    {t:"eDiscovery hold plus records management",
+     why:"An eDiscovery hold preserves content for a legal case and is meant to be temporary and silent. It's not how you implement a 7-year business retention schedule."}
+  ]
+},
+{
+  q: "You must prevent users from emailing documents that contain national ID numbers. Which capability?",
+  correct: 3,
+  options: [
+    {t:"A sensitivity label",
+     why:"Protects the content once it's classified, but on its own it doesn't watch outbound mail and stop the send."},
+    {t:"Insider Risk Management",
+     why:"Detects and investigates risky behaviour. It's a detection and investigation tool, not a real-time enforcement gate on the message."},
+    {t:"Communication Compliance",
+     why:"Reviews message content for policy violations — inappropriate language, regulated communications. Related, but it's oriented to review and remediation, not to blocking the transmission of a sensitive information type."},
+    {t:"Data Loss Prevention",
+     why:"DLP matches content against sensitive information types and enforces an action on the spot: block, block with override, or notify with a policy tip. It covers Exchange, SharePoint, OneDrive, Teams and endpoints."}
+  ]
+},
+{
+  q: "Which tool gives your organization a score against standards such as ISO 27001, GDPR and NIST, with improvement actions?",
+  correct: 1,
+  options: [
+    {t:"The Service Trust Portal",
+     why:"That's where <em>Microsoft's</em> audit reports live. It tells you nothing about your own configuration."},
+    {t:"Compliance Manager",
+     why:"Runs assessments against regulatory templates and produces a compliance score from the improvement actions you complete. Remember the caveat the exam likes: the score measures implemented actions, it is <strong>not</strong> a guarantee of compliance."},
+    {t:"Microsoft Secure Score",
+     why:"Measures the security posture of your Microsoft 365 identities, apps and devices. Security posture, not regulatory alignment — and it's domain 3."},
+    {t:"Microsoft Priva",
+     why:"Privacy risk management and subject rights requests. Adjacent to compliance, but it doesn't score you against ISO or NIST."}
+  ]
+},
+{
+  q: "What does eDiscovery Premium add over eDiscovery Standard?",
+  correct: 2,
+  options: [
+    {t:"The ability to place content on legal hold",
+     why:"Standard already does search, hold and export. Hold is not the upgrade."},
+    {t:"Coverage of Microsoft Teams content",
+     why:"Teams content is discoverable in both. Scope isn't what separates the tiers."},
+    {t:"Custodian management, review sets and analytics",
+     why:"Premium is built for a real legal workflow: identify custodians, send hold notifications, load evidence into review sets, and use analytics such as near-duplicate detection and threading to cut review volume."},
+    {t:"Automatic deletion of content once the case closes",
+     why:"eDiscovery preserves and collects. Deletion schedules belong to data lifecycle management, and nothing deletes automatically at case closure."}
+  ]
+},
+{
+  q: "One retention setting says delete after 3 years. Another says keep for 7. What happens to the item?",
+  correct: 1,
+  options: [
+    {t:"It is deleted after 3 years, because deletion takes precedence",
+     why:"Backwards. If deletion won, a single misconfigured policy could destroy content you are legally required to keep — which is exactly what the principle exists to prevent."},
+    {t:"It is kept for 7 years",
+     why:"Two rules, in this order: <strong>retention always wins over deletion</strong>, and when periods conflict, <strong>the longest one applies</strong>. Only after the 7 years can the deletion take effect."},
+    {t:"The most recently created policy wins",
+     why:"Invented rule. Purview resolves conflicts by principle, not by timestamp."},
+    {t:"The item is quarantined until an administrator resolves the conflict",
+     why:"Nothing is quarantined and no one is asked. The conflict resolves silently and predictably in favour of keeping the content."}
+  ]
+},
+{
+  q: "Which capability makes an item immutable, so it cannot be edited or deleted during its retention period?",
+  correct: 3,
+  options: [
+    {t:"A sensitivity label with encryption",
+     why:"Controls who can open the file and what they can do with it. An authorized user can still edit and delete it."},
+    {t:"A retention policy on its own",
+     why:"Ensures a copy is preserved behind the scenes, but users can still edit and delete the visible item and carry on working."},
+    {t:"A DLP policy",
+     why:"Evaluates sharing actions. It has no concept of locking an item for a period of time."},
+    {t:"Records management",
+     why:"Declaring an item a <em>record</em> locks it for its retention period. There is also a stricter <em>regulatory record</em>, which not even an administrator can unlock — that's the distinction the exam likes to test."}
+  ]
+},
+{
+  q: "You need to see what sensitive information already exists across your tenant, before writing any policy. Where do you look?",
+  correct: 0,
+  options: [
+    {t:"Content Explorer",
+     why:"Shows the actual items containing each sensitive information type or label, so you can see what you really have. Discovery before enforcement is the rule: writing DLP rules without it is guesswork."},
+    {t:"Activity Explorer",
+     why:"Its sibling, and a fair distractor. Activity Explorer shows the <em>actions</em> performed on labelled content — who shared, renamed or downgraded what. Content, not activity, is what the question asks for."},
+    {t:"Compliance Manager",
+     why:"Assessments and improvement actions against standards. It never looks inside your content."},
+    {t:"Microsoft Purview Audit",
+     why:"A record of user and admin operations. It tells you what was done, not what sensitive data exists."}
+  ]
+},
+{
+  q: "Which product handles privacy risk management and subject rights requests under regulations like GDPR?",
+  correct: 2,
+  options: [
+    {t:"Compliance Manager",
+     why:"Scores you against regulatory frameworks, including GDPR — but it doesn't execute an individual's request to access or delete their data."},
+    {t:"eDiscovery Premium",
+     why:"Built for litigation: custodians, holds, review sets. Technically capable of finding a person's data, but it is not the privacy product, and the exam expects the purpose-built answer."},
+    {t:"Microsoft Priva",
+     why:"The privacy product: privacy risk management and automated subject rights request workflows. Note it's licensed separately from the rest of Purview."},
+    {t:"Insider Risk Management",
+     why:"Detects risky internal behaviour. It protects the organization from its users, not users' privacy rights."}
+  ]
+},
+{
+  q: "Your DLP policy should warn the user but still let them proceed if they give a business reason. Which action do you configure?",
+  correct: 1,
+  options: [
+    {t:"Block",
+     why:"A hard stop with no way through. Correct when the rule is absolute, but the requirement explicitly says the user must be able to proceed."},
+    {t:"Block with override",
+     why:"The action is blocked, the user sees why, and they can continue by supplying a justification — which is logged for the compliance team. It's the usual starting point, because it protects without stopping legitimate work."},
+    {t:"Notify only, with a policy tip",
+     why:"Shows the tip but enforces nothing, and records no justification. It's what you use in a pilot, not what the requirement describes."},
+    {t:"Generate an alert for the compliance team",
+     why:"Tells the compliance team after the fact. The user never sees anything and nothing is blocked."}
+  ]
+}
 ]
 
 };
@@ -965,6 +1220,11 @@ d3: {
   hi:"That's the biggest domain of the exam handled. If you can also name the surface each Defender protects without looking, you're ready for domain 4.",
   mid:"Close. Run Lab 5 again — the misses here are almost always two products whose names look alike rather than a concept you don't understand.",
   lo:"Back to the write-up, and focus on three pairs: Defender for Identity vs Entra ID Protection, Defender for Cloud vs Defender for Cloud Apps, and Sentinel vs Defender for Cloud."
+},
+d4: {
+  hi:"All four domains covered. Take the official practice assessment next, and book the exam.",
+  mid:"Nearly there. In this domain the misses are usually one of two pairs: sensitivity vs retention label, or Service Trust Portal vs Compliance Manager. Fix those two and this becomes free points.",
+  lo:"Reread the write-up — this is the most memorizable domain in the exam, so a low score here is the easiest thing to fix. Start with the verb rule: protect, keep, prevent, find."
 }
 };
 
@@ -1484,9 +1744,129 @@ function checkNet(){
 
 function resetNet(){ buildNet(); document.getElementById("netFeedback").className = "feedback"; }
 
+/* ================= LAB 7: which Purview control? ================= */
+const CTRL_OPTS = [
+  "Sensitivity label",
+  "Retention label",
+  "Data Loss Prevention (DLP)",
+  "eDiscovery",
+  "Records management",
+  "Insider Risk Management"
+];
+const CTRL_ROWS = [
+  {r:"Invoices must be kept for 7 years", a:1, n:"The verb is <em>keep</em>. Lifespan, not protection."},
+  {r:"Users must not be able to email customer credit card numbers", a:2, n:"The verb is <em>prevent from leaving</em>, enforced at the moment of the action."},
+  {r:"Documents marked Secret must stay encrypted even outside the company", a:0, n:"The verb is <em>protect</em>, and the protection has to travel with the file."},
+  {r:"Legal needs every email from one employee for a lawsuit", a:3, n:"The verb is <em>find and preserve</em> for a legal case."},
+  {r:"Once declared, financial records must not be editable", a:4, n:"Immutability for the retention period — that's declaring the item a record."},
+  {r:"Detect an employee mass-downloading files before resigning", a:5, n:"A behavioural pattern from an internal user, correlated over days."}
+];
+
+function buildCtrl(){
+  const tb = document.querySelector("#ctrlTable tbody");
+  tb.innerHTML = "";
+  CTRL_ROWS.forEach((row, i) => {
+    let opts = '<option value="">— choose —</option>';
+    CTRL_OPTS.forEach((o, k) => opts += '<option value="'+k+'">'+o+'</option>');
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + row.r + "</td><td><select id=\"ctrl"+i+"\">" + opts + "</select></td>";
+    tb.appendChild(tr);
+  });
+}
+
+function checkCtrl(){
+  let ok = 0, blank = 0;
+  const missed = [];
+  CTRL_ROWS.forEach((row, i) => {
+    const sel = document.getElementById("ctrl"+i);
+    sel.classList.remove("ok","no");
+    if (sel.value === "") { blank++; return; }
+    if (parseInt(sel.value,10) === row.a) { sel.classList.add("ok"); ok++; }
+    else { sel.classList.add("no"); missed.push("<strong>" + row.r + "</strong> → " + CTRL_OPTS[row.a] + ". " + row.n); }
+  });
+  const fb = document.getElementById("ctrlFeedback");
+  if (blank === CTRL_ROWS.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Pick a capability for each requirement first, even if you're guessing.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === CTRL_ROWS.length ? "y" : "n");
+  let html = "<strong>" + ok + " / " + CTRL_ROWS.length + " correct.</strong>";
+  if (missed.length){
+    html += "<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " row(s) left blank.</em>";
+  html += "<br><br><strong>The rule that answers most of this domain:</strong> read the verb. <em>Protect / encrypt</em> → sensitivity label. <em>Keep / delete</em> → retention. <em>Must not leave</em> → DLP. <em>Find for a case</em> → eDiscovery. <em>Must not be editable</em> → records management. <em>Someone behaving oddly</em> → Insider Risk Management.";
+  fb.innerHTML = html;
+}
+
+function resetCtrl(){ buildCtrl(); document.getElementById("ctrlFeedback").className = "feedback"; }
+
+/* ================= LAB 8: where do I go? ================= */
+const PORTAL_OPTS = [
+  "Service Trust Portal",
+  "Compliance Manager",
+  "Content Explorer",
+  "Activity Explorer",
+  "Microsoft Purview Audit",
+  "Microsoft Priva"
+];
+const PORTAL_ROWS = [
+  {r:"An auditor asks you for Microsoft's SOC 2 report", a:0, n:"<strong>Microsoft's</strong> compliance, not yours. This is the one direction people get backwards."},
+  {r:"Show how your organization scores against ISO 27001, and what to fix next", a:1, n:"<strong>Your</strong> posture, with improvement actions. The mirror image of the row above."},
+  {r:"Find out what sensitive information already exists across the tenant", a:2, n:"Discovery before enforcement. Shows the items themselves."},
+  {r:"See who shared, renamed or downgraded labelled content", a:3, n:"Actions performed on content, rather than the content itself."},
+  {r:"Prove to an investigator which administrator deleted a mailbox item", a:4, n:"A tenant-wide record of user and admin operations."},
+  {r:"Handle an individual's request to access their personal data under GDPR", a:5, n:"Subject rights requests and privacy risk — licensed separately from the rest of Purview."}
+];
+
+function buildPortal(){
+  const tb = document.querySelector("#portalTable tbody");
+  tb.innerHTML = "";
+  PORTAL_ROWS.forEach((row, i) => {
+    let opts = '<option value="">— choose —</option>';
+    PORTAL_OPTS.forEach((o, k) => opts += '<option value="'+k+'">'+o+'</option>');
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + row.r + "</td><td><select id=\"portal"+i+"\">" + opts + "</select></td>";
+    tb.appendChild(tr);
+  });
+}
+
+function checkPortal(){
+  let ok = 0, blank = 0;
+  const missed = [];
+  PORTAL_ROWS.forEach((row, i) => {
+    const sel = document.getElementById("portal"+i);
+    sel.classList.remove("ok","no");
+    if (sel.value === "") { blank++; return; }
+    if (parseInt(sel.value,10) === row.a) { sel.classList.add("ok"); ok++; }
+    else { sel.classList.add("no"); missed.push("<strong>" + row.r + "</strong> → " + PORTAL_OPTS[row.a] + ". " + row.n); }
+  });
+  const fb = document.getElementById("portalFeedback");
+  if (blank === PORTAL_ROWS.length) {
+    fb.className = "feedback show n";
+    fb.innerHTML = "Pick a tool for each row first.";
+    return;
+  }
+  fb.className = "feedback show " + (ok === PORTAL_ROWS.length ? "y" : "n");
+  let html = "<strong>" + ok + " / " + PORTAL_ROWS.length + " correct.</strong>";
+  if (missed.length){
+    html += "<ul style='margin:8px 0 0;padding-left:20px'>";
+    missed.forEach(m => html += "<li>" + m + "</li>");
+    html += "</ul>";
+  }
+  if (blank) html += "<br><em>" + blank + " row(s) left blank.</em>";
+  html += "<br><br><strong>Ask whose compliance the question is about.</strong> Microsoft's → Service Trust Portal. Yours → Compliance Manager. Then, for your own data: what exists → Content Explorer, what was done to it → Activity Explorer, who did it → Audit.";
+  fb.innerHTML = html;
+}
+
+function resetPortal(){ buildPortal(); document.getElementById("portalFeedback").className = "feedback"; }
+
 /* ================= INIT ================= */
 DOMAINS.forEach(k => { buildQuiz(k); updateBar(k); });
-buildSR(); buildPillars(); buildLic(); buildCA(); buildXDR(); buildNet();
+buildSR(); buildPillars(); buildLic(); buildCA(); buildXDR(); buildNet(); buildCtrl(); buildPortal();
 applyHash();
 </script>
 </body>
